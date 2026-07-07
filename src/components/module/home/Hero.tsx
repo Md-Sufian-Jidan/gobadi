@@ -1,94 +1,100 @@
 import Image from "next/image";
-import hero_cow from "@/assets/gobadi_hero_image-1.webp";
+import gobadi_logo from "@/assets/gobadi_logo.webp";
+import hero_cow_portrait from "@/assets/hero_cow_portrait.png";
+import coming_soon_app from "@/assets/coming_soon_app.png";
+import gobadi_hero_image from "@/assets/gobadi_hero_image-1.webp";
+import { LuRocket } from "react-icons/lu";
 
 export default function Hero() {
   return (
-    <section id="hero" className="w-full py-12 md:py-20 lg:py-28 overflow-hidden bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Text Column */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-6 md:space-y-8 z-10">
-            <div className="inline-flex items-center gap-2 self-start bg-accent/10 px-4 py-1.5 rounded-full border border-accent/20">
-              <span className="text-xs font-bold font-display uppercase tracking-widest text-accent">
-                Cattle Management Ecosystem
-              </span>
+    <section id="hero" className="w-full py-12 md:py-16 lg:py-20 bg-background overflow-hidden relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        
+        {/* Main Grid Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
+          
+          {/* 1. Top-Left Box: Title & Text (Col span 7) */}
+          <div className="col-span-12 lg:col-span-7 bg-white rounded-[32px] border border-accent/10 p-8 sm:p-12 lg:p-14 flex flex-col justify-center min-h-[320px] sm:min-h-[380px] lg:min-h-[400px] shadow-sm relative overflow-hidden group">
+            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-[62px] lg:text-[70px] leading-[1.08] tracking-tight uppercase">
+              Where <span className="text-accent">Livestock</span> <br />
+              Meets <br />
+              <span className="text-accent">Intelligence.</span>
+            </h1>
+          </div>
+
+          {/* 2. Top-Right Box: Cow Image Card (Col span 5) */}
+          <div className="col-span-12 lg:col-span-5 bg-[#C86433] rounded-[32px] min-h-[320px] sm:min-h-[380px] lg:min-h-[400px] overflow-hidden relative shadow-sm group">
+            <Image 
+              src={hero_cow_portrait} 
+              alt="Gobadi Cow Portrait" 
+              fill
+              priority
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
+            />
+          </div>
+
+          {/* 3. Bottom-Left stacked column (Col span 3) */}
+          <div className="col-span-12 md:col-span-4 lg:col-span-3 flex flex-col gap-6">
+            
+            {/* Stay Tuned Card */}
+            <div className="bg-[#B35320] rounded-[32px] p-8 flex flex-col justify-center min-h-[160px] md:flex-1 shadow-sm relative overflow-hidden group">
+              <span className="font-display font-extrabold text-3xl sm:text-4xl text-[#171717] tracking-tight uppercase leading-none">STAY</span>
+              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#171717] tracking-tight uppercase leading-none mt-2">Tuned...</span>
             </div>
 
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold font-display leading-[1.05] tracking-tight text-foreground">
-                Smarter cattle care for <br />
-                <span className="text-accent underline decoration-accent-light decoration-4 underline-offset-8">
-                  healthier herds.
-                </span>
-              </h1>
-              <p className="text-lg text-foreground/80 font-sans max-w-xl leading-relaxed">
-                Empowering farmers and dairy owners with real-time health analytics, breed tracking, and diagnostic insights. Step into the future of dairy operations and livestock management.
-              </p>
+            {/* Launch Card */}
+            <div className="bg-white rounded-[32px] border border-accent/10 p-6 flex flex-col justify-between min-h-[120px] shadow-sm relative overflow-hidden">
+              <span className="text-xs font-bold text-slate-400 font-display uppercase tracking-wider">We are near to:</span>
+              <h4 className="text-3xl font-extrabold text-[#C1652F] font-display flex items-center gap-2 mt-2 leading-none">
+                <span>Launch</span>
+                <LuRocket className="w-7 h-7 text-[#C1652F] animate-bounce" />
+              </h4>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <a 
-                href="#stay-tuned" 
-                className="bg-accent text-background hover:bg-accent/90 px-8 py-4 rounded-2xl font-bold font-display tracking-wide text-center transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 duration-200"
-              >
-                Join Waitlist
-              </a>
-              <a 
-                href="#about" 
-                className="border-2 border-foreground/30 hover:border-foreground/80 text-foreground hover:bg-foreground/5 px-8 py-4 rounded-2xl font-bold font-display tracking-wide text-center transition-all duration-200"
-              >
-                Learn More
-              </a>
-            </div>
+          </div>
 
-            {/* Stats row */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-accent-light/40">
-              <div>
-                <p className="text-3xl font-bold font-display text-accent">98%</p>
-                <p className="text-xs font-semibold text-foreground/60 uppercase tracking-wider font-sans mt-1">Accuracy Rate</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold font-display text-accent">10k+</p>
-                <p className="text-xs font-semibold text-foreground/60 uppercase tracking-wider font-sans mt-1">Cattle Registered</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold font-display text-accent">24/7</p>
-                <p className="text-xs font-semibold text-foreground/60 uppercase tracking-wider font-sans mt-1">Health Monitoring</p>
-              </div>
+          {/* 4. Bottom-Middle Box: Hand holding phone (Col span 3) */}
+          <div className="col-span-12 md:col-span-4 lg:col-span-3 bg-[#B35320] rounded-[32px] min-h-[290px] md:min-h-auto overflow-hidden relative shadow-sm group">
+            <Image 
+              src={coming_soon_app} 
+              alt="Gobadi Mobile Application" 
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
+            />
+          </div>
+
+          {/* 5. Bottom-Right Box: Description & Cows (Col span 6) */}
+          <div className="col-span-12 md:col-span-4 lg:col-span-6 bg-white rounded-[32px] border border-accent/10 overflow-hidden flex flex-col justify-between min-h-[290px] md:min-h-auto shadow-sm relative">
+            <p className="text-[#171717] text-center font-semibold text-sm sm:text-base md:text-lg leading-relaxed max-w-md mx-auto pt-8 px-6">
+              AI-powered digital platform transforming the livestock eco-system by connecting farmers, veterinarians, and also trusted providers in one place.
+            </p>
+            <div className="relative w-full h-[150px] sm:h-[180px] lg:h-[150px] overflow-hidden mt-6">
+              <Image 
+                src={gobadi_hero_image} 
+                alt="Cattle on pasture" 
+                fill
+                className="object-cover" 
+              />
             </div>
           </div>
 
-          {/* Right Image Column */}
-          <div className="lg:col-span-5 relative w-full flex justify-center items-center">
-            {/* Background design accents */}
-            <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-accent-light/30 blur-3xl -z-10" />
-            <div className="absolute -bottom-10 -left-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl -z-10" />
-            
-            {/* Main Image Container */}
-            <div className="relative w-full max-w-md lg:max-w-none aspect-square md:aspect-[4/5] rounded-[2.5rem] p-4 bg-accent-light/20 border border-accent-light/40 overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent z-10 pointer-events-none" />
-              <div className="relative w-full h-full rounded-[2rem] overflow-hidden">
-                <Image 
-                  src={hero_cow} 
-                  alt="Gobadi Cattle Management" 
+          {/* Central Logo Overlay (Desktop Only) */}
+          <div className="absolute z-20 w-44 h-44 rounded-full bg-white border-[3px] border-accent flex flex-col items-center justify-center p-1.5 shadow-xl top-[53%] left-[58.33%] -translate-x-1/2 -translate-y-1/2 lg:flex hidden">
+            <div className="w-full h-full rounded-full border border-accent/40 flex flex-col items-center justify-center bg-[#FFF6F3]/50">
+              <div className="relative w-14 h-14">
+                <Image
+                  src={gobadi_logo}
+                  alt="Gobadi Icon"
                   fill
-                  priority
-                  className="object-cover hover:scale-105 transition-transform duration-700" 
+                  className="object-contain"
                 />
               </div>
-            </div>
-
-            {/* Float badge */}
-            <div className="absolute -bottom-4 right-4 bg-background border border-accent-light/40 shadow-xl rounded-2xl p-4 flex items-center gap-3 z-20 animate-bounce-slow">
-              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-              <div>
-                <p className="text-xs text-foreground/60 font-semibold uppercase">Status</p>
-                <p className="text-sm font-bold text-foreground">Herd Secure</p>
-              </div>
+              <h3 className="font-bengali font-bold text-[28px] text-primary leading-none mt-1.5">গবাদি</h3>
             </div>
           </div>
+
         </div>
+
       </div>
     </section>
   );
