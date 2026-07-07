@@ -20,6 +20,19 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Gobadi",
   description: "Gobadi is a animal website.",
+  twitter: {
+    card: "summary_large_image",
+    title: "Gobadi",
+    description: "Gobadi is a animal website.",
+    images: ["/assets/gobadi_logo.webp"],
+  },
+  openGraph: {
+    title: "Gobadi",
+    description: "Gobadi is a animal website.",
+    images: ["/assets/gobadi_logo.webp"],
+  },
+  authors: [{ name: "Md Sufian Jidan" }],
+  keywords: ["gobadi", "animal", "website"],
 };
 
 export default function RootLayout({
