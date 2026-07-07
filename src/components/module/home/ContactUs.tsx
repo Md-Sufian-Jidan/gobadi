@@ -18,7 +18,7 @@ export default async function ContactUs() {
                 </svg>
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
+            <div className="container mx-auto px-4 md:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
                     {/* Left Column: Text Content and Info Details */}

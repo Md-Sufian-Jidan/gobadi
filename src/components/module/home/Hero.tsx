@@ -8,11 +8,11 @@ import { LuRocket } from "react-icons/lu";
 export default function Hero() {
   return (
     <section id="hero" className="w-full py-12 md:py-16 lg:py-20 bg-background overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+
         {/* Main Grid Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
-          
+
           {/* 1. Top-Left Box: Title & Text (Col span 7) */}
           <div className="col-span-12 lg:col-span-7 bg-white rounded-[32px] border border-accent/10 p-8 sm:p-12 lg:p-14 flex flex-col justify-center min-h-[320px] sm:min-h-[380px] lg:min-h-[400px] shadow-sm relative overflow-hidden group">
             <h1 className="font-display font-black text-4xl sm:text-5xl md:text-[62px] lg:text-[70px] leading-[1.08] tracking-tight uppercase">
@@ -24,18 +24,18 @@ export default function Hero() {
 
           {/* 2. Top-Right Box: Cow Image Card (Col span 5) */}
           <div className="col-span-12 lg:col-span-5 bg-[#C86433] rounded-[32px] min-h-[320px] sm:min-h-[380px] lg:min-h-[400px] overflow-hidden relative shadow-sm group">
-            <Image 
-              src={hero_cow_portrait} 
-              alt="Gobadi Cow Portrait" 
+            <Image
+              src={hero_cow_portrait}
+              alt="Gobadi Cow Portrait"
               fill
               priority
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
           </div>
 
           {/* 3. Bottom-Left stacked column (Col span 3) */}
           <div className="col-span-12 md:col-span-4 lg:col-span-3 flex flex-col gap-6">
-            
+
             {/* Stay Tuned Card */}
             <div className="bg-[#B35320] rounded-[32px] p-8 flex flex-col justify-center min-h-[160px] md:flex-1 shadow-sm relative overflow-hidden group">
               <span className="font-display font-extrabold text-3xl sm:text-4xl text-[#171717] tracking-tight uppercase leading-none">STAY</span>
@@ -55,11 +55,11 @@ export default function Hero() {
 
           {/* 4. Bottom-Middle Box: Hand holding phone (Col span 3) */}
           <div className="col-span-12 md:col-span-4 lg:col-span-3 bg-[#B35320] rounded-[32px] min-h-[290px] md:min-h-auto overflow-hidden relative shadow-sm group">
-            <Image 
-              src={coming_soon_app} 
-              alt="Gobadi Mobile Application" 
+            <Image
+              src={coming_soon_app}
+              alt="Gobadi Mobile Application"
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" 
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             />
           </div>
 
@@ -69,11 +69,11 @@ export default function Hero() {
               AI-powered digital platform transforming the livestock eco-system by connecting farmers, veterinarians, and also trusted providers in one place.
             </p>
             <div className="relative w-full h-[150px] sm:h-[180px] lg:h-[150px] overflow-hidden mt-6">
-              <Image 
-                src={gobadi_hero_image} 
-                alt="Cattle on pasture" 
+              <Image
+                src={gobadi_hero_image}
+                alt="Cattle on pasture"
                 fill
-                className="object-cover" 
+                className="object-cover"
               />
             </div>
           </div>

@@ -11,16 +11,15 @@ import imgCowFence from '@/assets/our_vision_cow_fence.png';
 
 export default async function OurVission() {
     return (
-        <section className="w-full py-16 md:py-24 bg-background overflow-hidden">
-            <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <section id="our-vision" className="w-full py-16 md:py-24 bg-background overflow-hidden">
+            <div className="container mx-auto px-4 md:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                    
                     {/* Left Column: Title, Description, and Features */}
                     <div className="lg:col-span-7 flex flex-col gap-10">
-                        <ResuableTitleDescription 
-                            subTitle="OUR VISIONS" 
-                            title="Empowering Smarter Animal Care Through AI" 
-                            description="Gobadi is building a unified digital ecosystem where animal care becomes faster, smarter, and more accessible. Our goal is to improve animal wellbeing through AI-driven insights, expert consultation, and trusted marketplace solutions." 
+                        <ResuableTitleDescription
+                            subTitle="OUR VISIONS"
+                            title="Empowering Smarter Animal Care Through AI"
+                            description="Gobadi is building a unified digital ecosystem where animal care becomes faster, smarter, and more accessible. Our goal is to improve animal wellbeing through AI-driven insights, expert consultation, and trusted marketplace solutions."
                             align="left"
                         />
 

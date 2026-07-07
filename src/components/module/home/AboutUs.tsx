@@ -3,7 +3,7 @@ import Image from "next/image";
 export default async function AboutUs() {
     return (
         <section id="about" className="w-full bg-background overflow-hidden relative flex flex-col pt-12">
-            
+
             {/* Top Sky Dome Wrapper */}
             <div className="w-[94%] mx-auto bg-[#DCEEFE] rounded-t-[50%_40px] md:rounded-t-[50%_100px] lg:rounded-t-[50%_140px] pt-16 pb-36 md:pb-48 px-4 md:px-8 text-center relative overflow-hidden border-t border-x border-accent-light/10">
                 {/* Cloud Background overlay */}
@@ -39,18 +39,19 @@ export default async function AboutUs() {
             </div>
 
             {/* Bottom Golden Wheat Field Backdrop containing staggered cards */}
-            <div className="w-full relative pt-20 pb-16 md:pt-28 md:pb-24 bg-[#D28941]" style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1200&q=80')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-            }}>
+            <div className="w-full relative pt-20 pb-16 md:pt-28 md:pb-24 bg-[#D28941]"
+                style={{
+                    backgroundImage: `url('https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1200&q=80')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }}>
                 {/* Visual Blending Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10 pointer-events-none" />
 
                 {/* Overlapping Staggered Cards container */}
                 <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 -mt-44 md:-mt-64 lg:-mt-72">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center">
-                        
+
                         {/* Card 1: Farmer holding lamb */}
                         <div className="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden border-[6px] border-white shadow-2xl transition-all duration-300 hover:scale-[1.01] hover:shadow-white/5">
                             <Image
