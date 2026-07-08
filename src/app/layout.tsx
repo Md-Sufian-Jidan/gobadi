@@ -18,8 +18,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: "Gobadi",
-  description: "Gobadi is a animal website.",
+  description: "AI-powered digital platform transforming the livestock ecosystem.",
   twitter: {
     card: "summary_large_image",
     title: "Gobadi",
@@ -45,7 +46,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${notoBengali.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
 }

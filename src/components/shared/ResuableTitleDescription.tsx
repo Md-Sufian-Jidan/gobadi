@@ -2,27 +2,33 @@ export default function ResuableTitleDescription({
     subTitle,
     title,
     description,
-    align = 'center'
+    align = 'center',
+    subTitleClassName,
+    titleClassName,
+    descriptionClassName,
 }: {
     subTitle: string;
     title: string;
     description: string;
     align?: 'left' | 'center';
+    subTitleClassName?: string;
+    titleClassName?: string;
+    descriptionClassName?: string;
 }) {
     const isLeft = align === 'left';
     return (
         <div className={`flex flex-col ${isLeft ? 'items-start text-left' : 'items-center text-center'} gap-5`}>
-            <h3 className={`inline-flex items-center gap-2 bg-accent/10 py-1.5 px-4 md:py-2 md:px-5 rounded-full border border-accent/20`}>
+            <p className={subTitleClassName}>
                 <span className="text-xs md:text-sm font-bold font-display uppercase tracking-widest text-accent">
                     {subTitle}
                 </span>
-            </h3>
-            <h1 className="text-4xl md:text-5xl lg:text-[54px] font-bold font-display tracking-tight text-primary leading-[1.15]">
+            </p>
+            <h2 className={titleClassName}>
                 {title}
-            </h1>
-            <p className="text-secondary font-normal text-base md:text-lg leading-relaxed">
+            </h2>
+            <p className={descriptionClassName}>
                 {description}
             </p>
         </div>
-    )
+    );
 }

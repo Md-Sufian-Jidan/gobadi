@@ -1,101 +1,121 @@
-import Image from "next/image";
-import gobadi_logo from "@/assets/gobadi_logo.webp";
-import hero_cow_portrait from "@/assets/hero_cow_portrait.png";
-import coming_soon_app from "@/assets/coming_soon_app.png";
-import gobadi_hero_image from "@/assets/gobadi_hero_image-1.webp";
-import { LuRocket } from "react-icons/lu";
+import Image from 'next/image'
+import heroCard from '@/assets/hero_card.png'
+import rocket_icon from "@/assets/rocket.gif";
+import heroTextOverCow from "@/assets/herotextovercowbg.png";
+import gobadiLogo from "@/assets/hero_gobadi_logo.png";
+import heroShape from '@/assets/hero_shape_1.png'
+import heroShape2 from '@/assets/hero_shape_2.png'
+import heroCow from '@/assets/herocow.png';
 
 export default function Hero() {
-  return (
-    <section id="hero" className="w-full py-12 md:py-16 lg:py-20 bg-background overflow-hidden relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+    return (
+        <section
+            aria-label="Gobadi hero"
+            className="relative mx-auto max-w-[1312px] px-4 sm:px-6 lg:px-0"
+        >
+            <div className="space-y-4 lg:space-y-8">
+                <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
+                    <div className="relative grid flex-[1.6] grid-cols-1 grid-rows-1">
+                        <Image
+                            src={heroShape}
+                            alt=""
+                            priority
+                            className="col-start-1 row-start-1 h-full w-full rounded-[32px] object-cover"
+                            sizes="(min-width: 1024px) 60vw, 100vw"
+                        />
+                        <div className="relative col-start-1 row-start-1 flex flex-col justify-center p-6 sm:p-10 lg:p-14">
+                            <h1 className="font-display font-black uppercase leading-[0.95] tracking-tight text-[clamp(2rem,4.5vw,4.5rem)]">
+                                <span className="text-primary">Where</span>{" "}
+                                <span className="text-accent">Livestock</span>
+                                <br />
+                                <span className="text-primary">Meets</span>
+                                <br />
+                                <span className="text-accent">Intelligence.</span>
+                            </h1>
+                        </div>
+                    </div>
 
-        {/* Main Grid Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 relative">
+                    {/* right: cow shot */}
+                    <div className="relative grid flex-1 grid-cols-1 grid-rows-1 overflow-hidden rounded-[32px]">
+                        <Image
+                            src={heroShape2}
+                            alt=""
+                            className="col-start-1 row-start-1 h-full w-full object-cover"
+                            sizes="(min-width: 1024px) 32vw, 100vw"
+                        />
+                        <Image
+                            src={heroCow}
+                            alt="Cow standing for the Gobadi livestock platform"
+                            className="col-start-1 row-start-1 h-full w-full object-contain object-bottom"
+                            sizes="(min-width: 1024px) 32vw, 100vw"
+                        />
+                    </div>
+                </div>
 
-          {/* 1. Top-Left Box: Title & Text (Col span 7) */}
-          <div className="col-span-12 lg:col-span-7 bg-white rounded-[32px] border border-accent/10 p-8 sm:p-12 lg:p-14 flex flex-col justify-center min-h-[320px] sm:min-h-[380px] lg:min-h-[400px] shadow-sm relative overflow-hidden group">
-            <h1 className="font-display font-black text-4xl sm:text-5xl md:text-[62px] lg:text-[70px] leading-[1.08] tracking-tight uppercase">
-              Where <span className="text-accent">Livestock</span> <br />
-              Meets <br />
-              <span className="text-accent">Intelligence.</span>
-            </h1>
-          </div>
+                <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
+                    {/* stay tuned + launch stack */}
+                    <div className="flex flex-col gap-4 sm:gap-6 lg:w-[27%]">
+                        <div className="flex min-h-[220px] flex-1 flex-col justify-center rounded-[30px] bg-accent p-6 sm:min-h-[280px]">
+                            <h2 className="font-display font-extrabold uppercase leading-[1.1] text-[clamp(2rem,4vw,4rem)]">
+                                <span className="text-black">STAY</span>
+                                <br />
+                                <span className="text-white">Tuned...</span>
+                            </h2>
+                        </div>
 
-          {/* 2. Top-Right Box: Cow Image Card (Col span 5) */}
-          <div className="col-span-12 lg:col-span-5 bg-[#C86433] rounded-[32px] min-h-[320px] sm:min-h-[380px] lg:min-h-[400px] overflow-hidden relative shadow-sm group">
-            <Image
-              src={hero_cow_portrait}
-              alt="Gobadi Cow Portrait"
-              fill
-              priority
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            />
-          </div>
+                        <div className="bg-white rounded-[40px] border border-border p-6 relative flex flex-col justify-center h-[162px] shadow-sm">
+                            <span className="text-[24px] font-semibold text-primary uppercase tracking-wide">
+                                We are near to:
+                            </span>
+                            <h2 className="text-[88px] font-black text-accent leading-none z-10">
+                                Launch
+                            </h2>
+                            <Image
+                                src={rocket_icon}
+                                alt="Rocket icon"
+                                unoptimized
+                                className="h-32 w-32 absolute top-0 -right-9 rounded-full object-cover"
+                            />
+                        </div>
+                    </div>
 
-          {/* 3. Bottom-Left stacked column (Col span 3) */}
-          <div className="col-span-12 md:col-span-4 lg:col-span-3 flex flex-col gap-6">
+                    {/* phone mockup */}
+                    <div className="relative lg:w-[22%]">
+                        <Image
+                            src={heroCard}
+                            alt="Gobadi mobile app shown on a smartphone"
+                            className="h-full w-full rounded-[30px] object-cover"
+                            sizes="(min-width: 1024px) 22vw, 100vw"
+                        />
+                    </div>
 
-            {/* Stay Tuned Card */}
-            <div className="bg-[#B35320] rounded-[32px] p-8 flex flex-col justify-center min-h-[160px] md:flex-1 shadow-sm relative overflow-hidden group">
-              <span className="font-display font-extrabold text-3xl sm:text-4xl text-[#171717] tracking-tight uppercase leading-none">STAY</span>
-              <span className="font-display font-extrabold text-4xl sm:text-5xl text-[#171717] tracking-tight uppercase leading-none mt-2">Tuned...</span>
+                    {/* AI copy over cow herd */}
+                    <div className="relative grid flex-1 grid-cols-1 grid-rows-1">
+                        <Image
+                            src={heroTextOverCow}
+                            alt=""
+                            className="col-start-1 row-start-1 h-full w-full rounded-[30px] object-cover"
+                            sizes="(min-width: 1024px) 32vw, 100vw"
+                        />
+                        <p className="relative col-start-1 row-start-1 self-start px-8 pt-8 text-center text-[32px] font-bold text-primary sm:pt-12 md:text-xl lg:text-2xl z-50 leading-[1.2]">
+                            <span className='pl-56'>AI-powered digital platform</span> <br />
+                            <span className='pl-50'>transforming the livestock</span> <br />
+                            <span className='pl-44'>eco-system by connecting</span> <br />
+                            <span className='pl-38'>farmers, veterinarians, and also</span> <br />
+                            <span className='pl-28'>trusted providers in one place.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div className="absolute z-30 w-80 h-80 rounded-full bg-white border-[6px] border-accent flex items-center justify-center shadow-2xl top-[51%] left-[51%] -translate-x-1/2 -translate-y-1/2">
+                    <Image
+                        src={gobadiLogo}
+                        alt="Gobadi icon"
+                        className="h-full w-full rounded-full object-contain"
+                    />
+                </div>
+
             </div>
-
-            {/* Launch Card */}
-            <div className="bg-white rounded-[32px] border border-accent/10 p-6 flex flex-col justify-between min-h-[120px] shadow-sm relative overflow-hidden">
-              <span className="text-xs font-bold text-slate-400 font-display uppercase tracking-wider">We are near to:</span>
-              <h4 className="text-3xl font-extrabold text-[#C1652F] font-display flex items-center gap-2 mt-2 leading-none">
-                <span>Launch</span>
-                <LuRocket className="w-7 h-7 text-[#C1652F] animate-bounce" />
-              </h4>
-            </div>
-
-          </div>
-
-          {/* 4. Bottom-Middle Box: Hand holding phone (Col span 3) */}
-          <div className="col-span-12 md:col-span-4 lg:col-span-3 bg-[#B35320] rounded-[32px] min-h-[290px] md:min-h-auto overflow-hidden relative shadow-sm group">
-            <Image
-              src={coming_soon_app}
-              alt="Gobadi Mobile Application"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            />
-          </div>
-
-          {/* 5. Bottom-Right Box: Description & Cows (Col span 6) */}
-          <div className="col-span-12 md:col-span-4 lg:col-span-6 bg-white rounded-[32px] border border-accent/10 overflow-hidden flex flex-col justify-between min-h-[290px] md:min-h-auto shadow-sm relative">
-            <p className="text-[#171717] text-center font-semibold text-sm sm:text-base md:text-lg leading-relaxed max-w-md mx-auto pt-8 px-6">
-              AI-powered digital platform transforming the livestock eco-system by connecting farmers, veterinarians, and also trusted providers in one place.
-            </p>
-            <div className="relative w-full h-[150px] sm:h-[180px] lg:h-[150px] overflow-hidden mt-6">
-              <Image
-                src={gobadi_hero_image}
-                alt="Cattle on pasture"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Central Logo Overlay (Desktop Only) */}
-          <div className="absolute z-20 w-44 h-44 rounded-full bg-white border-[3px] border-accent flex flex-col items-center justify-center p-1.5 shadow-xl top-[53%] left-[58.33%] -translate-x-1/2 -translate-y-1/2 lg:flex hidden">
-            <div className="w-full h-full rounded-full border border-accent/40 flex flex-col items-center justify-center bg-[#FFF6F3]/50">
-              <div className="relative w-14 h-14">
-                <Image
-                  src={gobadi_logo}
-                  alt="Gobadi Icon"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <h3 className="font-bengali font-bold text-[28px] text-primary leading-none mt-1.5">গবাদি</h3>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-  );
+        </section>
+    )
 }

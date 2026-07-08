@@ -8,6 +8,10 @@
   --border: #C0612B;
   --secondary: #525252;
   --primary: #171717;
+  --description: #262626;
+  --accent-light-50: #C0612B80;
+  --sub-title-bg: #FBE6DA;
+  --about-blue: #D1E6F3;
 }
 
 @theme {
@@ -16,8 +20,12 @@
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
   --color-border: var(--border);
+  --color-accent-light-50: var(--accent-light-50);
   --color-secondary: var(--secondary);
   --color-primary: var(--primary);
+  --color-description: var(--description);
+  --color-sub-title-bg: var(--sub-title-bg);
+  --color-about-blue: var(--about-blue);
 
   --font-sans: var(--font-inter), sans-serif;
   --font-display: var(--font-space-grotesk), sans-serif;
@@ -25,7 +33,6 @@
 }
 
 body {
-  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
 }
