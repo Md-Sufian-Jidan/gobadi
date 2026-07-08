@@ -1,58 +1,110 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import gobadi_logo from "@/assets/gobadi_logo.webp";
 import Link from "next/link";
 import { BiSolidZap } from "react-icons/bi";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
+import gobadiLogo from "@/assets/gobadiLogo.png";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const navLinks = [
+    {
+      title: "Home",
+      href: "/",
+    },
+    {
+      title: "About Us",
+      href: "#about",
+    },
+    {
+      title: "Our Vision",
+      href: "#our-vision",
+    },
+  ];
+
   return (
-    <header className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-300">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative p-1.5 rounded-xl border border-gray-100 shadow-sm transition-colors">
+    <header className="sticky top-0 z-50 w-full bg-white/10 backdrop-blur-md">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3">
+            <div>
               <Image
-                src={gobadi_logo}
+                src={gobadiLogo}
                 alt="Gobadi logo"
                 width={36}
                 height={36}
                 className="object-contain"
               />
             </div>
-            <span className="text-3xl font-bold tracking-tight text-primary font-bengali">
+
+            <span className="font-bengali text-2xl font-bold text-primary sm:text-3xl">
               গবাদি
             </span>
           </Link>
 
-          <div className="flex flex-row items-center justify-between gap-6">
-            <nav className="hidden md:flex items-center gap-10" aria-label="Main navigation">
-              <Link
-                href="/"
-                className="text-primary font-bold transition-colors text-[15px]"
-              >
-                Home
-              </Link>
-              <Link
-                href="#about"
-                className="text-secondary hover:text-primary font-medium transition-colors text-[15px]"
-              >
-                About Us
-              </Link>
-              <Link
-                href="#our-vision"
-                className="text-secondary hover:text-primary font-medium transition-colors text-[15px]"
-              >
-                Our Vision
-              </Link>
+          {/* Desktop Nav */}
+          <div className="hidden items-center gap-8 md:flex">
+            <nav aria-label="Main navigation" className="flex items-center gap-8">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="font-medium text-primary  transition hover:text-secondary"
+                >
+                  {item.title}
+                </Link>
+              ))}
             </nav>
 
             <Link
               href="#contact"
-              className="flex items-center gap-2 bg-border text-white hover:bg-accent transition-all font-semibold px-6 py-3 rounded-2xl shadow-sm text-[15px]"
+              className="flex items-center gap-2 rounded-2xl bg-border px-6 py-3 font-semibold text-white transition hover:bg-accent"
             >
-              <BiSolidZap size={18} fill="currentColor" aria-hidden />
+              <BiSolidZap size={18} />
               Contact Us
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="rounded-lg p-2 md:hidden"
+            aria-label="Toggle Menu"
+          >
+            {open ? <HiX size={28} /> : <HiMenuAlt3 size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          className={`overflow-hidden transition-all duration-300 md:hidden ${open ? "max-h-96 pb-6" : "max-h-0"
+            }`}
+        >
+          <nav aria-label="Mobile navigation" className="flex flex-col gap-5 pt-4">
+            {navLinks.map((item) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="text-lg font-medium text-primary"
+              >
+                {item.title}
+              </Link>
+            ))}
+
+            <Link
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="mt-2 flex w-full items-center justify-center gap-2 rounded-2xl bg-border px-6 py-3 font-semibold text-white transition hover:bg-accent"
+            >
+              <BiSolidZap size={18} />
+              Contact Us
+            </Link>
+          </nav>
         </div>
       </div>
     </header>

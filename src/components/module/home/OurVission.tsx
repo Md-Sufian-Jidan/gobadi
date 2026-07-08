@@ -34,8 +34,8 @@ const features = [
 
 export default function OurVission() {
     return (
-        <section id="our-vision" className="w-full py-16 md:py-24 bg-white overflow-hidden">
-            <div className="container mx-auto px-4 md:px-8">
+        <section id="our-visions" aria-labelledby="our-vision-heading" className="w-full py-16 md:py-24 bg-white overflow-hidden">
+            <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                     <div className="lg:col-span-6 flex flex-col gap-10">
                         <ResuableTitleDescription
