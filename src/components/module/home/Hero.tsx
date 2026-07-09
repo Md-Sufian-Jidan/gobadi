@@ -13,8 +13,8 @@ export default function Hero() {
             aria-label="Gobadi hero"
             className="relative mx-auto max-w-[1350px] px-4 sm:px-6 lg:px-0 mt-10 lg:mt-20"
         >
-            <div className="space-y-4 lg:space-y-8 ">
-                <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-5 lg:gap-6">
+            <div className="space-y-4 lg:space-y-8 px-0 lg:px-6">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-0 lg:gap-6">
                     <div className="relative grid flex-[1.6] grid-cols-1 grid-rows-1">
                         <Image
                             src={heroShape}
@@ -23,8 +23,8 @@ export default function Hero() {
                             className=" h-full w-full"
                             sizes="(min-width: 1024px) 100vw, 60vw"
                         />
-                        <div className="absolute inset-0 flex items-center p-6 sm:p-10 lg:p-14">
-                            <h1 className="font-display font-black leading-[1.05] text-[clamp(2rem,6vw,4.7rem)]">
+                        <div className="absolute inset-0 flex items-center md:p-6 p-3 sm:p-10 lg:p-14">
+                            <h1 className="font-display font-black leading-[1.05] text-[30px] md:text-[72px]">
                                 <span className="text-primary">Where</span>{" "}
                                 <span className="text-accent">Livestock</span>
                                 <br />
@@ -35,7 +35,7 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    <div className="relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-auto lg:min-h-[470px] overflow-visible">
+                    <div className="md:flex flex-col hidden relative aspect-[4/5] sm:aspect-[5/6] lg:aspect-auto lg:min-h-[470px] overflow-visible">
                         <Image
                             src={heroShape2}
                             alt="Cow standing shape"
@@ -46,7 +46,7 @@ export default function Hero() {
                         <Image
                             src={heroCow}
                             alt="Cow standing for the Gobadi livestock platform"
-                            className="absolute z-10 lg:h-[550px] h-[390px] w-full lg:-mt-20 mt-1.5"
+                            className="absolute z-10 lg:h-[550px] h-[390px] w-full lg:-mt-23 mt-1.5"
                             sizes="(min-width: 1024px) 32vw, 100vw"
                             priority
                         />
@@ -55,19 +55,19 @@ export default function Hero() {
 
                 <div className="flex flex-col gap-4 lg:flex-row lg:gap-6">
                     <div className="flex flex-col gap-4 sm:gap-6 lg:w-[26%]">
-                        <div className="flex flex-1 flex-col justify-center rounded-[30px] bg-accent p-6 aspect-[4/3]">
-                            <h2 className="font-display font-extrabold uppercase leading-[1.1] text-[clamp(2rem,4vw,4rem)]">
+                        <div className="flex flex-1 flex-col justify-center rounded-[30px] bg-accent p-6 md:aspect-[4/3]">
+                            <h2 className="font-display font-extrabold uppercase leading-[1.1] md:text-[64px] text-[30px]">
                                 <span className="text-black">STAY</span>
                                 <br />
                                 <span className="text-white">Tuned...</span>
                             </h2>
                         </div>
 
-                        <div className="bg-white rounded-[40px] border border-border p-6 relative flex flex-col justify-center min-h-[150px] lg:min-h-[165px] shadow-sm overflow-hidden">
-                            <span className="text-[24px] font-semibold text-primary uppercase tracking-wide">
+                        <div className="bg-white rounded-[40px] border border-border p-5 relative flex flex-col justify-center min-h-[150px] lg:min-h-[165px] shadow-sm overflow-hidden">
+                            <span className="md:text-[24px] text-[18px] font-semibold text-primary uppercase tracking-wide">
                                 We are near to:
                             </span>
-                            <h2 className="text-[88px] font-black text-accent leading-none z-10">
+                            <h2 className="text-[44px] md:text-[88px] font-semibold text-accent leading-none z-10">
                                 Launch
                             </h2>
                             <Image
@@ -83,7 +83,7 @@ export default function Hero() {
                         <Image
                             src={heroCard}
                             alt="Gobadi mobile app shown on a smartphone"
-                            className="h-full w-full rounded-[30px] object-cover"
+                            className="lg:h-full h-[450px] w-full rounded-[30px] object-cover"
                             sizes="(min-width: 1024px) 22vw, 100vw"
                         />
                     </div>
@@ -97,8 +97,8 @@ export default function Hero() {
                         />
 
                         <div className="absolute inset-0 flex items-start justify-center pt-6 sm:pt-8 lg:pt-10 px-4 sm:px-6">
-                            <p className="w-full text-right lg:text-left text-base sm:text-lg md:text-xl lg:text-[28px] font-bold text-primary leading-relaxed">
-                                <span className="block lg:pl-56">AI-powered digital platform</span>
+                            <p className="w-full text-right lg:text-left text-[14px] md:text-xl lg:text-[28px] font-bold text-primary leading-relaxed">
+                                <span className="block lg:pl-50">AI-powered digital platform</span>
                                 <span className="block lg:pl-48">transforming the livestock</span>
                                 <span className="block lg:pl-40">eco-system by connecting</span>
                                 <span className="block lg:pl-24">farmers, veterinarians, and also</span>

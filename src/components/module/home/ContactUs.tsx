@@ -6,7 +6,7 @@ export default function ContactUs() {
     return (
         <section
             id="contact"
-            className=" relative bg-accent py-16 md:py-24 mt-16 md:mt-24"
+            className=" relative bg-accent py-12 md:py-24 mt-6 md:mt-24"
             style={{
                 backgroundImage: `
                     linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
@@ -19,7 +19,7 @@ export default function ContactUs() {
                 <div className="absolute top-0 left-0 w-full overflow-hidden leading-none -translate-y-[99%]">
                     <svg
                         viewBox="0 0 1440 90"
-                        className="block w-full h-[80px] md:h-[100px] fill-accent"
+                        className="block w-full h-[30px] md:h-[100px] fill-accent"
                         preserveAspectRatio="none"
                         aria-hidden
                     >
@@ -35,7 +35,7 @@ export default function ContactUs() {
                     </svg>
                 </div>
 
-                <div className="container mx-auto px-4 md:px-8 relative z-10">
+                <div className="container mx-auto px-1 md:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                         <div className="lg:col-span-7 flex flex-col gap-10">
                             <div className="flex flex-col items-start gap-4">
@@ -58,8 +58,8 @@ export default function ContactUs() {
                                         <FiMail className="w-5 h-5" aria-hidden />
                                     </div>
                                     <div className="space-y-1">
-                                        <h3 className="text-base font-bold text-white font-display">Email</h3>
-                                        <p className="text-white/85 text-sm md:text-base font-normal break-all">
+                                        <h3 className="md:text-[30px] text-xl font-semibold text-white font-display">Email</h3>
+                                        <p className="text-white md:text-lg text-base font-normal break-all">
                                             ceo.gobaadi@gmail.com
                                         </p>
                                     </div>
@@ -70,8 +70,8 @@ export default function ContactUs() {
                                         <FiPhone className="w-5 h-5" aria-hidden />
                                     </div>
                                     <div className="space-y-1">
-                                        <h3 className="text-base font-bold text-white font-display">Phone</h3>
-                                        <p className="text-white/85 text-sm md:text-base font-normal">
+                                        <h3 className="md:text-[30px] text-xl font-semibold text-white font-display">Phone</h3>
+                                        <p className="text-white md:text-lg text-base font-normal">
                                             +8801911418977
                                         </p>
                                     </div>
@@ -82,8 +82,8 @@ export default function ContactUs() {
                                         <FiMapPin className="w-5 h-5" aria-hidden />
                                     </div>
                                     <div className="space-y-1">
-                                        <h3 className="text-base font-bold text-white font-display">Office</h3>
-                                        <p className="text-white/85 text-sm md:text-base font-normal leading-relaxed max-w-md">
+                                        <h3 className="md:text-[30px] text-xl font-semibold text-white font-display">Office</h3>
+                                        <p className="text-white md:text-lg text-base font-normal leading-relaxed max-w-md">
                                             Road# 9 , house# 5 , Lane#3, Mirpur 11/a, Dhaka, 1216, Bangladesh.
                                         </p>
                                     </div>

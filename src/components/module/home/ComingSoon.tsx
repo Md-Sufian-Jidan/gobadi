@@ -7,11 +7,11 @@ const SOON_LETTERS = ["S", "O", "O", "N"] as const;
 
 export default function ComingSoon() {
     return (
-        <section className="w-full py-16 md:py-24 overflow-hidden">
+        <section className="w-full py-12 md:py-24 overflow-hidden">
             <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
                     <div className="lg:col-span-7 flex flex-col gap-4 md:gap-6 items-start">
-                        <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-[64px] text-primary tracking-tight leading-[1.1] uppercase">
+                        <h2 className="font-audiowide font-normal text-[36px] md:text-[87px] text-primary tracking-tight leading-[1.1] uppercase">
                             Something <br /> New Is
                         </h2>
 
@@ -47,7 +47,6 @@ export default function ComingSoon() {
                                 priority
                                 className="object-contain z-20 pointer-events-none"
                             />
-
                         </div>
                     </div>
                 </div>
