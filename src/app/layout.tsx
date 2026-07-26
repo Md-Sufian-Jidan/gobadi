@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Noto_Sans_Bengali, Inter, Audiowide } from "next/font/google";
+import { Space_Grotesk, Noto_Sans_Bengali, Inter, Audiowide, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -101,7 +104,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${notoBengali.variable} ${audiowide.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", inter.variable, spaceGrotesk.variable, notoBengali.variable, audiowide.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col font-sans">{children}
       </body>
