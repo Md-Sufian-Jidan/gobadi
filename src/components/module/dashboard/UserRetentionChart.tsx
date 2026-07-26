@@ -1,8 +1,28 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Filter, ArrowUpRight, ChevronDown } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Cell,
+  ReferenceLine,
+  ResponsiveContainer,
+} from "recharts";
+import { Filter, ChevronDown, Triangle } from "lucide-react";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface BarPoint {
   day: string;
@@ -14,197 +34,140 @@ const barData: BarPoint[] = [
   { day: "Mon", value: 200 },
   { day: "Tue", value: 160 },
   { day: "Wed", value: 310 },
-  { day: "Thu", value: 280 },
-  { day: "Fri", value: 440, isHighlighted: true }, // Highlighted bar on Friday
+  { day: "Thu", value: 210 },
+  { day: "Fri", value: 440, isHighlighted: true },
   { day: "Sat", value: 290 },
   { day: "Sun", value: 360 },
 ];
 
-export const UserRetentionChart: React.FC = () => {
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const [timeFilter, setTimeFilter] = useState("last 7 days");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+const chartConfig = {
+  value: {
+    label: "Users",
+    color: "#C1652F",
+  },
+} satisfies ChartConfig;
 
-  const maxY = 500;
-  const height = 180;
-  const width = 450;
-  const paddingX = 30;
-  const paddingY = 25;
-  const targetValue = 350;
-
-  const barWidth = 32;
+// Custom Label Component for the Reference Line Badge
+const CustomReferenceLabel = (props: any) => {
+  const { viewBox } = props;
+  const { y } = viewBox;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: 0.5 }}
-      className="bg-white border border-[#EAE5DD] shadow-xs rounded-[20px] sm:rounded-[24px] p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden"
-    >
+    <g transform={`translate(10, ${y - 10})`}>
+      <rect
+        width="56"
+        height="20"
+        rx="6"
+        fill="#2A1B14"
+      />
+      <text
+        x="28"
+        y="13"
+        fill="#FFFFFF"
+        fontSize="9"
+        fontWeight="600"
+        textAnchor="middle"
+      >
+        350 users
+      </text>
+    </g>
+  );
+};
+
+export const UserRetentionChart: React.FC = () => {
+  const [timeFilter, setTimeFilter] = useState("last 7 days");
+
+  return (
+    <div className="w-full h-full bg-white border border-[#EAE5DD] shadow-xs rounded-[24px] p-6 flex flex-col justify-between relative overflow-hidden font-sans">
       {/* Header section */}
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex items-start justify-between gap-2 mb-4">
         <div>
-          <h3 className="font-bold text-sm sm:text-base text-[#1A1A1A] font-display">
+          <h3 className="font-bold text-lg text-[#1A1A1A] font-display tracking-tight">
             User Retention
           </h3>
-          <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-xl sm:text-2xl font-extrabold text-[#1A1A1A] font-display">
+          <div className="mt-2 flex items-center gap-2">
+            <span className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1A1A1A] font-display">
               678
             </span>
-            <div className="inline-flex items-center gap-0.5 text-xs font-semibold text-[#16A34A] bg-[#DCFCE7] px-2 py-0.5 rounded-full">
-              <ArrowUpRight className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-1 text-xs sm:text-sm font-bold text-[#16A34A]">
+              <Triangle className="h-2.5 w-2.5 fill-[#16A34A] stroke-none" />
               <span>32%</span>
             </div>
           </div>
         </div>
 
-        {/* Dropdown Filter */}
-        <div className="relative shrink-0">
-          <button
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border border-[#E5E0D8] bg-[#F7F4EE] text-xs font-medium text-[#525252] hover:text-[#1A1A1A] transition-colors cursor-pointer"
-          >
-            <Filter className="w-3.5 h-3.5 text-[#C1652F]" />
+        {/* Time Filter Dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#E5E0D8] text-xs font-semibold text-[#525252] hover:text-[#1A1A1A] hover:bg-[#F7F4EE] transition-colors cursor-pointer outline-none shrink-0">
+            <Filter className="w-3.5 h-3.5 text-[#525252]" />
             <span>{timeFilter}</span>
-            <ChevronDown className="w-3.5 h-3.5 text-[#737373]" />
-          </button>
-
-          {dropdownOpen && (
-            <div className="absolute right-0 mt-1 w-32 bg-white border border-[#EAE5DD] shadow-lg rounded-xl py-1 z-20 text-xs">
-              {["last 7 days", "last 30 days", "this year"].map((opt) => (
-                <button
-                  key={opt}
-                  onClick={() => {
-                    setTimeFilter(opt);
-                    setDropdownOpen(false);
-                  }}
-                  className="w-full text-left px-3 py-1.5 hover:bg-[#F7F4EE] text-[#525252] hover:text-[#1A1A1A] cursor-pointer"
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* SVG Bar Chart with Horizontal Target Threshold Line */}
-      <div className="mt-4 relative w-full overflow-x-auto min-w-0">
-        <svg
-          viewBox={`0 0 ${width} ${height}`}
-          className="w-full min-w-[280px] h-40 sm:h-44 overflow-visible"
-        >
-          {/* Target Threshold Line (dashed horizontal at 350) */}
-          {(() => {
-            const targetY =
-              height - paddingY - (targetValue / maxY) * (height - 2 * paddingY);
-            return (
-              <g>
-                <line
-                  x1={paddingX}
-                  y1={targetY}
-                  x2={width - paddingX}
-                  y2={targetY}
-                  stroke="#52392E"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 3"
-                />
-                {/* Badge for 350 users matching mockup image */}
-                <rect
-                  x={paddingX}
-                  y={targetY - 10}
-                  width="54"
-                  height="18"
-                  rx="6"
-                  fill="#2A1B14"
-                />
-                <text
-                  x={paddingX + 27}
-                  y={targetY + 2}
-                  textAnchor="middle"
-                  fontSize="9"
-                  fill="#FFFFFF"
-                  fontWeight="bold"
-                >
-                  350 users
-                </text>
-              </g>
-            );
-          })()}
-
-          {/* Render Bars */}
-          {barData.map((d, i) => {
-            const x =
-              paddingX +
-              (i / (barData.length - 1)) * (width - 2 * paddingX - barWidth);
-            const barHeight = (d.value / maxY) * (height - 2 * paddingY);
-            const y = height - paddingY - barHeight;
-            const isHovered = hoveredIdx === i;
-
-            return (
-              <g
-                key={i}
-                onMouseEnter={() => setHoveredIdx(i)}
-                onMouseLeave={() => setHoveredIdx(null)}
-                className="cursor-pointer"
+            <ChevronDown className="w-3.5 h-3.5 text-[#525252]" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-32 bg-white border border-[#EAE5DD] shadow-lg rounded-xl py-1 z-20 text-xs">
+            {["last 7 days", "last 30 days", "this year"].map((opt) => (
+              <DropdownMenuItem
+                key={opt}
+                onClick={() => setTimeFilter(opt)}
+                className="w-full text-left px-3 py-1.5 hover:bg-[#F7F4EE] text-[#525252] hover:text-[#1A1A1A] cursor-pointer"
               >
-                {/* Rounded Bar */}
-                <motion.rect
-                  x={x}
-                  y={y}
-                  width={barWidth}
-                  height={barHeight}
-                  rx="10"
-                  fill={
-                    d.isHighlighted
-                      ? "#C1652F"
-                      : isHovered
-                      ? "#E8DCC4"
-                      : "#F7EFEA"
-                  }
-                  className="transition-colors duration-200"
-                />
-
-                {/* Day Label */}
-                <text
-                  x={x + barWidth / 2}
-                  y={height - 5}
-                  textAnchor="middle"
-                  fontSize="10"
-                  fill="#737373"
-                  fontWeight="500"
-                >
-                  {d.day}
-                </text>
-
-                {/* Hover Tooltip */}
-                {isHovered && (
-                  <g>
-                    <rect
-                      x={x + barWidth / 2 - 24}
-                      y={y - 28}
-                      width="48"
-                      height="20"
-                      rx="6"
-                      fill="#1A1A1A"
-                    />
-                    <text
-                      x={x + barWidth / 2}
-                      y={y - 14}
-                      textAnchor="middle"
-                      fontSize="10"
-                      fill="#FFFFFF"
-                      fontWeight="bold"
-                    >
-                      {d.value}
-                    </text>
-                  </g>
-                )}
-              </g>
-            );
-          })}
-        </svg>
+                {opt}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
-    </motion.div>
+
+      {/* Recharts Bar Chart */}
+      <div className="w-full h-56 mt-2">
+        <ChartContainer config={chartConfig} className="w-full h-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={barData}
+              margin={{ top: 20, right: 10, left: 10, bottom: 0 }}
+              barCategoryGap="18%"
+            >
+              <XAxis
+                dataKey="day"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "#A3A3A3", fontSize: 11, fontWeight: 500 }}
+                dy={10}
+              />
+              <YAxis hide domain={[0, 500]} />
+
+              <ChartTooltip
+                cursor={{ fill: "rgba(0, 0, 0, 0.02)" }}
+                content={<ChartTooltipContent hideLabel />}
+              />
+
+              {/* Dotted Target Line (350 users) */}
+              <ReferenceLine
+                y={350}
+                stroke="#52392E"
+                strokeDasharray="3 3"
+                strokeWidth={1.5}
+                label={<CustomReferenceLabel />}
+              />
+
+              {/* Bars with rounded caps */}
+              <Bar
+                dataKey="value"
+                radius={[12, 12, 12, 12]}
+              >
+                {barData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.isHighlighted ? "#C1652F" : "#FDF5F0"}
+                    className="transition-colors duration-200 hover:opacity-80"
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartContainer>
+      </div>
+    </div>
   );
 };
+
+export default UserRetentionChart;

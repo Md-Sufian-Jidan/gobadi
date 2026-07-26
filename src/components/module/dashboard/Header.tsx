@@ -4,6 +4,17 @@ import React, { useState, useEffect } from "react";
 import { Search, Bell, X, Command, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import dashboardDemoProfile from "@/assets/dashboar-user-avatar.svg"
+import Image from "next/image";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface HeaderProps {
   onOpenMobileMenu?: () => void;
@@ -44,13 +55,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
           <div className="relative flex-1">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 bg-[#F7F4EE] border border-[#E5E0D8] rounded-xl sm:rounded-2xl text-left text-xs sm:text-sm text-[#737373] hover:border-[#C0612B80] transition-all duration-200 cursor-pointer group"
+              className="w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 bg-[#F8F7F7] border border-[#E2E2E2] rounded-xl text-left text-xs sm:text-sm text-[#737373] hover:border-[#C0612B80] transition-all duration-200 cursor-pointer group"
             >
               <div className="flex items-center gap-2 sm:gap-2.5">
                 <Search className="w-4 h-4 text-[#737373] group-hover:text-[#1A1A1A] transition-colors" />
                 <span className="font-medium">Search...</span>
               </div>
-              <kbd className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 text-[10px] font-semibold text-[#737373] bg-white border border-[#E0D8CC] rounded-lg shadow-2xs">
+              <kbd className="hidden sm:inline-flex items-center gap-0.5 px-3 py-1.5 text-[10px] font-semibold text-[#737373] bg-white border border-[#E0D8CC] rounded-lg shadow-2xs">
                 <Command className="w-2.5 h-2.5" /> K
               </kbd>
             </button>
@@ -62,8 +73,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
           {/* Notifications Button */}
           <div className="relative">
             <button
-              onClick={() => setUnreadNotifications(false)}
-              className="relative p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-[#F7F4EE] hover:bg-[#EFEAE4] text-[#1A1A1A] border border-[#E5E0D8] transition-colors cursor-pointer"
+              onClick={() => setUnreadNotifications(!unreadNotifications)}
+              className="relative p-2 sm:p-2.5 rounded-xl sm:rounded-2xl text-[#1A1A1A] transition-colors cursor-pointer"
               title="Notifications"
             >
               <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-[#1A1A1A]" />
@@ -73,15 +84,25 @@ export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
             </button>
           </div>
 
+          <div className="hidden md:flex flex-col justify-end">
+            <h6 className="font-semibold text-base text-primary">Istiak Ratul</h6>
+            <p className="text-[10px] text-[#121212]">Super Admin</p>
+          </div>
+
           {/* User Profile Avatar */}
           <div className="flex items-center gap-3 cursor-pointer group">
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-[#C1652F] shadow-xs group-hover:scale-105 transition-transform duration-200 bg-[#E8DCC4]">
-              <div className="w-full h-full bg-gradient-to-tr from-[#C1652F] via-[#E8DCC4] to-[#FBE6DA] flex items-center justify-center">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#1A1A1A] text-white flex items-center justify-center font-bold text-xs">
-                  A
-                </div>
-              </div>
-            </div>
+            <Image src={dashboardDemoProfile} alt="Dashboard Demo Profile" width={40} height={40} className="hidden md:block w-full h-full object-cover" />
+            <DropdownMenu>
+              <DropdownMenuTrigger className="md:hidden block">
+                <Image src={dashboardDemoProfile} alt="Dashboard Demo Profile" width={40} height={40} className="block w-full h-full object-cover" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuGroup className="p-2">
+                  <DropdownMenuItem className="font-semibold text-base text-primary">Istiak Ratul</DropdownMenuItem>
+                  <DropdownMenuItem className="text-[10px] text-[#121212]">Super Admin</DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>

@@ -14,7 +14,7 @@ export default function DashboardLayout({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F7F4EE] text-[#1A1A1A] p-2.5 sm:p-5 flex gap-4 sm:gap-6 font-sans">
+    <div className=" bg-[#F7F4EE] text-[#1A1A1A] p-3 flex gap-4 font-sans">
       {/* Desktop Sticky Sidebar Navigation */}
       <Sidebar
         collapsed={collapsed}

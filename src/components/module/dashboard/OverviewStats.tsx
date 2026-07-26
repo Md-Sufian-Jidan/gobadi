@@ -2,14 +2,13 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Smartphone,
-  User,
-  Wheat,
-  Stethoscope,
-  ArrowUpRight,
-  ArrowDownRight,
-} from "lucide-react";
+import { Triangle } from "lucide-react";
+import Image, { StaticImageData } from "next/image";
+
+import dashboardStatIcon1 from "@/assets/dashboard-download.svg";
+import dashboardStatIcon2 from "@/assets/dashboard-user.svg";
+import dashboardStatIcon3 from "@/assets/dashboard-farmer.svg";
+import dashboardStatIcon4 from "@/assets/dashboard-doctor.svg";
 
 interface StatItem {
   id: string;
@@ -17,7 +16,7 @@ interface StatItem {
   value: string;
   change: string;
   isPositive: boolean;
-  icon: React.ElementType;
+  icon: StaticImageData;
 }
 
 const stats: StatItem[] = [
@@ -27,7 +26,7 @@ const stats: StatItem[] = [
     value: "678",
     change: "32%",
     isPositive: true,
-    icon: Smartphone,
+    icon: dashboardStatIcon1,
   },
   {
     id: "total_user",
@@ -35,7 +34,7 @@ const stats: StatItem[] = [
     value: "788",
     change: "32%",
     isPositive: true,
-    icon: User,
+    icon: dashboardStatIcon2,
   },
   {
     id: "farmers",
@@ -43,7 +42,7 @@ const stats: StatItem[] = [
     value: "678",
     change: "32%",
     isPositive: true,
-    icon: Wheat,
+    icon: dashboardStatIcon3,
   },
   {
     id: "doctors",
@@ -51,7 +50,7 @@ const stats: StatItem[] = [
     value: "678",
     change: "48%",
     isPositive: false,
-    icon: Stethoscope,
+    icon: dashboardStatIcon4,
   },
 ];
 
@@ -59,7 +58,6 @@ export const OverviewStats: React.FC = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       {stats.map((stat, index) => {
-        const Icon = stat.icon;
         return (
           <motion.div
             key={stat.id}
@@ -71,32 +69,34 @@ export const OverviewStats: React.FC = () => {
           >
             {/* Top row: Title and Icon */}
             <div className="flex items-start justify-between">
-              <span className="text-[#525252] font-semibold text-xs sm:text-sm tracking-tight">
+              <span className="text-[#1A1A1A] font-bold text-base sm:text-lg tracking-tight font-display">
                 {stat.title}
               </span>
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#FBE6DA] text-[#C1652F] flex items-center justify-center border border-[#F2D7C7] group-hover:scale-110 transition-transform duration-200 shrink-0">
-                <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+              <div className="w-8 h-8 rounded-full bg-[#F9EFEA] flex items-center justify-center border border-[#F2DFD5] group-hover:scale-110 transition-transform duration-200 shrink-0">
+                <Image src={stat.icon} alt={stat.title} width={18} height={18} />
               </div>
             </div>
 
             {/* Bottom row: Large value & Trend Badge */}
-            <div className="mt-3 sm:mt-4 flex items-baseline gap-2.5 sm:gap-3">
-              <span className="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] tracking-tight font-display">
+            <div className="mt-3 sm:mt-4 flex items-center gap-2">
+              <span className="text-3xl sm:text-4xl font-extrabold text-[#1A1A1A] tracking-tight font-display">
                 {stat.value}
               </span>
 
               <div
-                className={`inline-flex items-center gap-0.5 text-[11px] sm:text-xs font-semibold px-2 py-0.5 rounded-full ${
+                className={`inline-flex items-center gap-1 text-xs sm:text-sm font-bold ${
                   stat.isPositive
-                    ? "text-[#16A34A] bg-[#DCFCE7]"
-                    : "text-[#DC2626] bg-[#FEE2E2]"
+                    ? "text-[#16A34A]"
+                    : "text-[#DC2626]"
                 }`}
               >
-                {stat.isPositive ? (
-                  <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                ) : (
-                  <ArrowDownRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                )}
+                <Triangle
+                  className={`w-2.5 h-2.5 ${
+                    stat.isPositive
+                      ? "fill-[#16A34A] stroke-none"
+                      : "fill-[#DC2626] stroke-none rotate-180"
+                  }`}
+                />
                 <span>{stat.change}</span>
               </div>
             </div>

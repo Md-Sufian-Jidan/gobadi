@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Filter, ChevronDown } from "lucide-react";
-import { OverviewStats } from "@/components/module/dashboard/OverviewStats";
-import { UserGrowthChart } from "@/components/module/dashboard/UserGrowthChart";
-import { UsersOSChart } from "@/components/module/dashboard/UsersOSChart";
-import { UserRetentionChart } from "@/components/module/dashboard/UserRetentionChart";
+import { UserListOverviewStats } from "@/components/module/dashboard/userList/UserListOverviewStats";
+import { UserLocationChart } from "@/components/module/dashboard/userList/UserLocationChart";
+import { DailyUserChart } from "@/components/module/dashboard/userList/DailyUserChart";
+import { RegisteredAnimalChart } from "@/components/module/dashboard/userList/RegisteredAnimalChart";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,7 +14,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function DashboardPage() {
+export default function UserListPage() {
     const [globalFilter, setGlobalFilter] = useState("last 7 days");
 
     return (
@@ -27,7 +27,7 @@ export default function DashboardPage() {
             {/* Top Header of Overview */}
             <div className="flex items-center justify-between border-b border-[#F5F2EC] pb-3.5 sm:pb-4">
                 <h1 className="text-lg sm:text-xl font-extrabold text-[#1A1A1A] font-display tracking-tight">
-                    Overview
+                    Total User Info
                 </h1>
 
                 {/* Time Filter Dropdown */}
@@ -52,18 +52,18 @@ export default function DashboardPage() {
             </div>
 
             {/* Overview 4 Stat Cards */}
-            <OverviewStats />
+            <UserListOverviewStats />
 
             {/* 3 Interactive Chart Cards Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
-                <div className="lg:col-span-4 flex flex-col">
-                    <UserGrowthChart />
+                <div className="lg:col-span-6 flex flex-col">
+                    <UserLocationChart />
                 </div>
-                <div className="lg:col-span-4 flex flex-col">
-                    <UsersOSChart />
+                <div className="lg:col-span-3 flex flex-col">
+                    <DailyUserChart />
                 </div>
-                <div className="lg:col-span-4 flex flex-col">
-                    <UserRetentionChart />
+                <div className="lg:col-span-3 flex flex-col">
+                    <RegisteredAnimalChart />
                 </div>
             </div>
         </motion.div>
