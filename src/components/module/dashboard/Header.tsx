@@ -20,7 +20,7 @@ interface HeaderProps {
   onOpenMobileMenu?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onOpenMobileMenu }) => {
+export default function Header({ onOpenMobileMenu }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [unreadNotifications, setUnreadNotifications] = useState(true);

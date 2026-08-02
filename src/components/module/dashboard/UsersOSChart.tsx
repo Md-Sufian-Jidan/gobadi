@@ -126,7 +126,7 @@ const CustomDot = (props: DotProps & { payload?: OSDataPoint }) => {
   return null;
 };
 
-export const UsersOSChart: React.FC = () => {
+export default function UsersOSChart() {
   const [selectedOS, setSelectedOS] = useState<"android" | "ios">("android");
   const [timeFilter, setTimeFilter] = useState("last month");
 
@@ -166,8 +166,8 @@ export const UsersOSChart: React.FC = () => {
         <button
           onClick={() => setSelectedOS("android")}
           className={`flex-1 py-1.5 text-xs font-semibold rounded-xl transition-all duration-200 cursor-pointer ${selectedOS === "android"
-              ? "bg-white text-[#1A1A1A] shadow-xs"
-              : "text-[#8C8881] hover:text-[#1A1A1A]"
+            ? "bg-white text-[#1A1A1A] shadow-xs"
+            : "text-[#8C8881] hover:text-[#1A1A1A]"
             }`}
         >
           Android
@@ -175,8 +175,8 @@ export const UsersOSChart: React.FC = () => {
         <button
           onClick={() => setSelectedOS("ios")}
           className={`flex-1 py-1.5 text-xs font-semibold rounded-xl transition-all duration-200 cursor-pointer ${selectedOS === "ios"
-              ? "bg-white text-[#1A1A1A] shadow-xs"
-              : "text-[#8C8881] hover:text-[#1A1A1A]"
+            ? "bg-white text-[#1A1A1A] shadow-xs"
+            : "text-[#8C8881] hover:text-[#1A1A1A]"
             }`}
         >
           iOS
@@ -247,5 +247,3 @@ export const UsersOSChart: React.FC = () => {
     </div>
   );
 };
-
-export default UsersOSChart;

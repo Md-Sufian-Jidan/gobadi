@@ -211,7 +211,7 @@ To deploy your own copy:
 3. Import your forked repository
 4. Click **Deploy** — Vercel handles everything else automatically
 
-The `NEXT_PUBLIC_SITE_URL` environment variable is used for generating absolute URLs in metadata (Open Graph, Twitter cards). Set this to your own domain in Vercel's environment variable settings.
+The `NEXT_PUBLIC_API_URL` environment variable is used for generating absolute URLs in metadata (Open Graph, Twitter cards). Set this to your own domain in Vercel's environment variable settings.
 
 ---
 

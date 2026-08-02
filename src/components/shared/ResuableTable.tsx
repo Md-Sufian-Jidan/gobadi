@@ -1,15 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { Search, Filter, ChevronDown, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
     Table,
     TableHeader,
@@ -34,21 +28,17 @@ export interface FilterOption {
 }
 
 export interface ResuableTableProps<T> {
-    // Title & Header props
     title?: string
     totalCount?: number | string
 
-    // Data & Columns
     data: T[]
     columns: TableColumn<T>[]
     getRowKey?: (item: T, index: number) => string | number
 
-    // Selection
     selectable?: boolean
     selectedIds?: (string | number)[]
     onSelectionChange?: (selectedIds: (string | number)[]) => void
 
-    // Search & Filter
     searchPlaceholder?: string
     searchValue?: string
     onSearchChange?: (value: string) => void
@@ -56,15 +46,12 @@ export interface ResuableTableProps<T> {
     selectedFilter?: string
     onFilterChange?: (filterValue: string) => void
 
-    // Extra Action (e.g. + Add New Button)
     headerAction?: React.ReactNode
 
-    // Pagination
     currentPage?: number
     totalPages?: number
     onPageChange?: (page: number) => void
 
-    // Loading & Empty States
     isLoading?: boolean
     emptyText?: string
     className?: string
@@ -97,30 +84,6 @@ export default function ResuableTable<T>({
     emptyText = "No records found.",
     className,
 }: ResuableTableProps<T>) {
-    // Internal search state if not controlled externally
-    const [internalSearch, setInternalSearch] = React.useState("")
-    const searchValue = externalSearchValue !== undefined ? externalSearchValue : internalSearch
-
-    const handleSearchChange = (val: string) => {
-        if (onSearchChange) {
-            onSearchChange(val)
-        } else {
-            setInternalSearch(val)
-        }
-    }
-
-    // Internal filter state
-    const [internalFilter, setInternalFilter] = React.useState(filterOptions[0]?.value || "all")
-    const selectedFilter = externalSelectedFilter !== undefined ? externalSelectedFilter : internalFilter
-
-    const handleFilterSelect = (val: string) => {
-        if (onFilterChange) {
-            onFilterChange(val)
-        } else {
-            setInternalFilter(val)
-        }
-    }
-
     // Internal selection state
     const [internalSelectedIds, setInternalSelectedIds] = React.useState<(string | number)[]>([])
     const selectedIds = externalSelectedIds !== undefined ? externalSelectedIds : internalSelectedIds
@@ -154,7 +117,6 @@ export default function ResuableTable<T>({
     const isAllSelected = data.length > 0 && selectedIds.length === data.length
     const searchInputRef = React.useRef<HTMLInputElement>(null)
 
-    // Keyboard shortcut Ctrl+K or Cmd+K to focus search input
     React.useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -166,21 +128,18 @@ export default function ResuableTable<T>({
         return () => window.removeEventListener("keydown", handleKeyDown)
     }, [])
 
-    const currentFilterLabel =
-        filterOptions.find((opt) => opt.value === selectedFilter)?.label || "All"
-
     return (
         <div className={cn("w-full", className)}>
             {/* Main Table Card Box */}
-            <div className="border border-[#EAE5DD] rounded-[16px] sm:rounded-[20px] overflow-hidden bg-white shadow-xs">
+            <div className="border border-[#5B5B5B33] rounded-[16px] sm:rounded-[20px] overflow-hidden bg-white shadow-xs">
                 <div className="overflow-x-auto">
                     <Table className="w-full border-collapse">
                         {/* Table Header */}
                         <TableHeader className="bg-white">
-                            <TableRow className="border-b border-[#EAE5DD] hover:bg-transparent">
+                            <TableRow className="border-b border-[#5B5B5B33] hover:bg-transparent">
                                 {/* Select All Checkbox Column */}
                                 {selectable && (
-                                    <TableHead className="w-12 px-3 sm:px-4 py-3.5 text-center border-r border-[#EAE5DD]">
+                                    <TableHead className="w-12 px-3 sm:px-4 py-3.5 text-center border-r border-[#5B5B5B33]">
                                         <div className="flex items-center justify-center">
                                             <Checkbox
                                                 checked={isAllSelected}
@@ -196,7 +155,7 @@ export default function ResuableTable<T>({
                                     <TableHead
                                         key={col.key}
                                         className={cn(
-                                            "px-4 py-3.5 text-xs sm:text-sm font-semibold text-[#1A1A1A] whitespace-nowrap border-r border-[#EAE5DD] last:border-r-0",
+                                            "px-4 py-3.5 text-xs sm:text-sm font-semibold text-[#1A1A1A] whitespace-nowrap border-r border-[#5B5B5B33] last:border-r-0",
                                             col.align === "center" && "text-center",
                                             col.align === "right" && "text-right",
                                             col.align === "left" && "text-left",
@@ -241,13 +200,14 @@ export default function ResuableTable<T>({
                                         <TableRow
                                             key={key}
                                             className={cn(
-                                                "border-b border-[#EAE5DD] last:border-b-0 hover:bg-[#FAF9F6]/80 transition-colors",
-                                                isSelected && "bg-[#F7F4EE]/60"
+                                                "border-b border-[#5B5B5B33] last:border-b-0 hover:bg-[#FAF9F6]/80 transition-colors",
+                                                index % 2 === 0 ? "bg-[#FBFAFC]" : "bg-white",
+                                                isSelected && "bg-[#F7F4EE]/80"
                                             )}
                                         >
                                             {/* Checkbox Cell */}
                                             {selectable && (
-                                                <TableCell className="w-12 px-3 sm:px-4 py-3 text-center border-r border-[#EAE5DD]">
+                                                <TableCell className="w-12 px-3 sm:px-4 py-3 text-center border-r border-[#5B5B5B33]">
                                                     <div className="flex items-center justify-center">
                                                         <Checkbox
                                                             checked={isSelected}
@@ -265,7 +225,7 @@ export default function ResuableTable<T>({
                                                     <TableCell
                                                         key={col.key}
                                                         className={cn(
-                                                            "px-4 py-3 text-xs sm:text-sm text-[#1A1A1A] whitespace-nowrap border-r border-[#EAE5DD] last:border-r-0 align-middle",
+                                                            "px-4 py-3 text-xs sm:text-sm text-[#1A1A1A] whitespace-nowrap border-r border-[#5B5B5B33] last:border-r-0 align-middle",
                                                             col.align === "center" && "text-center",
                                                             col.align === "right" && "text-right",
                                                             col.align === "left" && "text-left",
@@ -287,7 +247,7 @@ export default function ResuableTable<T>({
                 </div>
 
                 {/* Table Footer / Pagination */}
-                <div className="border-t border-[#EAE5DD] px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white">
+                <div className="border-t border-[#5B5B5B33] px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3 bg-white">
                     {/* Left Info: Page X of Y */}
                     <div className="text-xs sm:text-sm font-semibold text-[#2563EB]">
                         Page {currentPage} of {totalPages}

@@ -36,11 +36,11 @@ const chartData = [
 const chartConfig = {
   value: {
     label: "Users",
-    color: "#C15C2B", // Warm terracotta / rust orange stroke color
+    color: "#C15C2B",
   },
 } satisfies ChartConfig;
 
-export function UserGrowthChart() {
+export default function UserGrowthChart() {
   const [timeFilter, setTimeFilter] = useState("last 7 days");
 
   return (

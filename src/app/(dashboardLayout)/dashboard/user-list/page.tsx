@@ -3,16 +3,16 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Filter, ChevronDown } from "lucide-react";
-import { UserListOverviewStats } from "@/components/module/dashboard/userList/UserListOverviewStats";
-import { UserLocationChart } from "@/components/module/dashboard/userList/UserLocationChart";
-import { DailyUserChart } from "@/components/module/dashboard/userList/DailyUserChart";
-import { RegisteredAnimalChart } from "@/components/module/dashboard/userList/RegisteredAnimalChart";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import UserListOverviewStats from "@/components/module/dashboard/userList/UserListOverviewStats";
+import DailyUserChart from "@/components/module/dashboard/userList/DailyUserChart";
+import RegisteredAnimalChart from "@/components/module/dashboard/userList/RegisteredAnimalChart";
+import UserLocationChart from "@/components/module/dashboard/userList/UserLocationChart";
 
 export default function UserListPage() {
     const [globalFilter, setGlobalFilter] = useState("last 7 days");

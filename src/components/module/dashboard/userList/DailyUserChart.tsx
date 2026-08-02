@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Filter, ChevronDown, Triangle } from "lucide-react";
 import {
     Bar,
@@ -41,7 +41,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export function DailyUserChart() {
+export default function DailyUserChart() {
     const [timeFilter, setTimeFilter] = useState("last 7 days");
 
     return (

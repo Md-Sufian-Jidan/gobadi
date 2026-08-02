@@ -106,7 +106,7 @@ export default function NotificationsTable({
 
   // Register handler on the window so the page can call it
   React.useEffect(() => {
-    ;(window as unknown as Record<string, unknown>).__addNotification = addNotification
+    ; (window as unknown as Record<string, unknown>).__addNotification = addNotification
     return () => {
       delete (window as unknown as Record<string, unknown>).__addNotification
     }
@@ -260,4 +260,4 @@ export default function NotificationsTable({
       onPageChange={setCurrentPage}
     />
   )
-}
+};

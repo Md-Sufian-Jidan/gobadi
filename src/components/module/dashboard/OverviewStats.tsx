@@ -54,7 +54,7 @@ const stats: StatItem[] = [
   },
 ];
 
-export const OverviewStats: React.FC = () => {
+export default function OverviewStats() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       {stats.map((stat, index) => {
@@ -84,18 +84,16 @@ export const OverviewStats: React.FC = () => {
               </span>
 
               <div
-                className={`inline-flex items-center gap-1 text-xs sm:text-sm font-bold ${
-                  stat.isPositive
+                className={`inline-flex items-center gap-1 text-xs sm:text-sm font-bold ${stat.isPositive
                     ? "text-[#16A34A]"
                     : "text-[#DC2626]"
-                }`}
+                  }`}
               >
                 <Triangle
-                  className={`w-2.5 h-2.5 ${
-                    stat.isPositive
+                  className={`w-2.5 h-2.5 ${stat.isPositive
                       ? "fill-[#16A34A] stroke-none"
                       : "fill-[#DC2626] stroke-none rotate-180"
-                  }`}
+                    }`}
                 />
                 <span>{stat.change}</span>
               </div>

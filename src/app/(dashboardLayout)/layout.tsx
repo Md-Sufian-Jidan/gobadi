@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sidebar, SidebarContent } from "@/components/module/dashboard/Sidebar";
-import { Header } from "@/components/module/dashboard/Header";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
+import Header from "@/components/module/dashboard/Header";
+import Sidebar from "@/components/module/dashboard/Sidebar";
+import SidebarContent from "@/components/module/dashboard/SidebarContent";
 
 export default function DashboardLayout({
   children,
@@ -29,7 +30,7 @@ export default function DashboardLayout({
       </Sheet>
 
       {/* Main Content Workspace */}
-      <div className="flex-1 flex flex-col gap-3.5 sm:gap-6 min-w-0">
+      <div className="flex-1 flex flex-col gap-3.5 min-w-0">
         <Header onOpenMobileMenu={() => setMobileOpen(true)} />
         <main className="flex-1 min-w-0">{children}</main>
       </div>

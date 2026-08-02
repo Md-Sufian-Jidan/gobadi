@@ -74,7 +74,7 @@ const CustomReferenceLabel = (props: any) => {
   );
 };
 
-export const UserRetentionChart: React.FC = () => {
+export default function UserRetentionChart() {
   const [timeFilter, setTimeFilter] = useState("last 7 days");
 
   return (
@@ -169,5 +169,3 @@ export const UserRetentionChart: React.FC = () => {
     </div>
   );
 };
-
-export default UserRetentionChart;

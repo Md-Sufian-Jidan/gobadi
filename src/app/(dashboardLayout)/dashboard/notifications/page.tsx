@@ -5,9 +5,10 @@ import { motion } from "framer-motion"
 import { Plus } from "lucide-react"
 import DataTableHeader from "@/components/shared/DataTableHeader"
 import NotificationsTable from "@/components/module/dashboard/notifications/NotificationsTable"
-import AddNotificationModal, {
-  NotificationItem,
-} from "@/components/module/dashboard/notifications/AddNotificationModal"
+import AddNotificationModal, { NotificationItem, } from "@/components/module/dashboard/notifications/AddNotificationModal"
+import { Button } from "@/components/ui/button"
+import addnewplus from "@/assets/addnewplus.svg"
+import Image from "next/image"
 
 export default function NotificationsPage() {
   const [searchValue, setSearchValue] = useState("")
@@ -19,7 +20,7 @@ export default function NotificationsPage() {
     // The table manages its own localStorage, we trigger it via window proxy
     const addFn = (window as unknown as Record<string, unknown>).__addNotification
     if (typeof addFn === "function") {
-      ;(addFn as (n: Omit<NotificationItem, "id">) => void)(notification)
+      ; (addFn as (n: Omit<NotificationItem, "id">) => void)(notification)
     }
   }, [])
 
@@ -47,14 +48,21 @@ export default function NotificationsPage() {
             { label: "Yearly", value: "yearly" },
           ]}
           actions={
-            <button
-              type="button"
+            <Button
+              variant="secondary"
+              id="add-new-admin-btn"
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center gap-2 h-9 px-4 rounded-xl bg-[#F0EDE8] border border-[#E5E0D8] text-xs sm:text-sm font-semibold text-[#1A1A1A] hover:bg-[#E5E0D8] transition-colors cursor-pointer whitespace-nowrap"
+              className="h-10 px-5 py-2.5 rounded-lg bg-gradient-to-b from-[#E5E5E5] to-[#E2E2E2] border border-[#D4D4D4] text-sm font-medium text-primary hover:shadow-md hover:from-[#E2E2E2] hover:to-[#E5E5E5] transition-all cursor-pointer flex items-center gap-2"
             >
-              <Plus className="w-4 h-4" />
-              Add New Notification
-            </button>
+              <Image
+                src={addnewplus}
+                alt="Add new admin icon"
+                width={16}
+                height={16}
+                className="w-4 h-4"
+              />
+              <span>Add New Notification</span>
+            </Button>
           }
         />
 

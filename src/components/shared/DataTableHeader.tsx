@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { Search, Filter, ChevronDown } from "lucide-react"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,6 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Kbd } from "@/components/ui/kbd"
+import Image from "next/image"
+import filtericon from "@/assets/filter-icon.svg"
+import filterarrowicon from "@/assets/filter-arrow-icon.svg"
+import magnifyingglassicon from "@/assets/magnifyingglass.svg"
+import { Button } from "@/components/ui/button"
 
 export interface FilterOption {
     label: string
@@ -50,7 +54,7 @@ export default function DataTableHeader({
     const currentLabel = filterOptions.find((opt) => opt.value === selectedFilter)?.label || "All"
 
     return (
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-1">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-[#7B7B7B4D]">
             {/* Title & Count */}
             <div className="flex items-center gap-2">
                 <h1 className="text-sm font-semibold text-primary">
@@ -64,20 +68,26 @@ export default function DataTableHeader({
             </div>
 
             {/* Controls Container */}
-            <div className="flex flex-row items-center gap-2 sm:gap-3 w-full sm:w-auto justify-end">
+            <div className={`flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-end ${actions ? 'md:flex-row flex-wrap' : 'flex-row'}`}>
                 {/* Search Bar */}
                 {onSearchChange && (
                     <div className="relative flex items-center w-full sm:w-64 md:w-72">
-                        <Search className="absolute left-3 w-4 h-4 text-[#A3A3A3] pointer-events-none z-10" />
+                        <Image
+                            src={magnifyingglassicon}
+                            alt="magnifyingglassicon"
+                            width={16}
+                            height={16}
+                            className="absolute left-3.5 w-4 h-4 pointer-events-none z-10 opacity-70"
+                        />
                         <Input
                             type="text"
                             value={searchValue}
                             onChange={(e) => onSearchChange(e.target.value)}
                             placeholder={searchPlaceholder}
-                            className="h-9 pl-9 pr-12 text-xs sm:text-sm bg-[#F8F7F7] border-[#E2E2E2] text-[#1A1A1A] placeholder:text-[#A3A3A3] focus-visible:ring-0 focus-visible:border-[#ECECEC] focus-visible:bg-white transition-all"
+                            className="h-9 w-full pl-9 pr-14 text-xs sm:text-sm bg-[#F8F8F8] border border-[#E4E4E4] rounded-[10px] text-[#1A1A1A] placeholder:text-[#737373] focus-visible:ring-0 focus-visible:border-[#CCCCCC] focus-visible:bg-white transition-all shadow-none"
                         />
                         {shortcutHint && (
-                            <Kbd className="absolute right-2.5 z-10 text-[10px] font-semibold text-[#737373] bg-[#F1F1F1] border border-[#D5CFB6]">
+                            <Kbd className="absolute right-2 z-10 h-6 px-2 py-0.5 text-[11px] font-medium text-[#525252] bg-gradient-to-b from-[#FFFFFF] to-[#EAEAEA] border border-[#D4D4D4] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.1)]">
                                 {shortcutHint}
                             </Kbd>
                         )}
@@ -87,10 +97,12 @@ export default function DataTableHeader({
                 {/* Filter Dropdown */}
                 {onFilterChange && filterOptions.length > 0 && (
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="flex items-center gap-2 h-9 px-3.5 bg-white border border-[#E5E0D8] rounded-[10px] text-xs sm:text-sm font-medium text-[#1A1A1A] hover:bg-[#F7F4EE] transition-colors outline-none cursor-pointer">
-                            <Filter className="w-3.5 h-3.5 text-[#525252]" />
-                            <span>{currentLabel}</span>
-                            <ChevronDown className="w-3.5 h-3.5 text-[#737373] ml-1" />
+                        <DropdownMenuTrigger className="flex items-center justify-between gap-2 h-9 w-34 px-3 py-1 bg-white border border-[#ECECEC] rounded-[10px] text-sm font-medium text-[#1A1A1A] hover:bg-[#F7F4EE] transition-colors outline-none cursor-pointer">
+                            <div className="flex items-center gap-2">
+                                <Image src={filtericon} alt="Filter icon" width={16} height={16} className="w-4 h-4" />
+                                <span>{currentLabel}</span>
+                            </div>
+                            <Image src={filterarrowicon} alt="Filter arrow icon" width={20} height={20} className="w-5 h-5" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
                             align="end"
@@ -100,7 +112,7 @@ export default function DataTableHeader({
                                 <DropdownMenuItem
                                     key={opt.value}
                                     onClick={() => onFilterChange(opt.value)}
-                                    className="px-3 py-1.5 text-xs font-medium text-[#525252] hover:bg-[#F7F4EE] hover:text-[#1A1A1A] rounded-lg cursor-pointer transition-colors"
+                                    className="px-3 py-1.5 text-xs font-medium text-[#525252] hover:bg-[#F7F4EE] hover:text-[#1A1A1A] rounded-[10px] cursor-pointer transition-colors"
                                 >
                                     {opt.label}
                                 </DropdownMenuItem>

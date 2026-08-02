@@ -104,44 +104,6 @@ function buildSeedData(): AdminItem[] {
     ]
 }
 
-// ─── Status Badge ─────────────────────────────────────────────────────────────
-function StatusBadge({ status }: { status: "Active" | "Inactive" }) {
-    return (
-        <span
-            className={cn(
-                "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold",
-                status === "Active"
-                    ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
-                    : "bg-red-50 text-red-600 ring-1 ring-red-200"
-            )}
-        >
-            <span
-                className={cn(
-                    "w-1.5 h-1.5 rounded-full",
-                    status === "Active" ? "bg-emerald-500" : "bg-red-500"
-                )}
-            />
-            {status}
-        </span>
-    )
-}
-
-// ─── Role Badge ───────────────────────────────────────────────────────────────
-function RoleBadge({ role }: { role: "SUPER ADMIN" | "ADMIN" }) {
-    return (
-        <span
-            className={cn(
-                "inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold tracking-wide",
-                role === "SUPER ADMIN"
-                    ? "bg-amber-50 text-amber-700 ring-1 ring-amber-200"
-                    : "bg-sky-50 text-sky-700 ring-1 ring-sky-200"
-            )}
-        >
-            {role}
-        </span>
-    )
-}
-
 // ─── Props ────────────────────────────────────────────────────────────────────
 export interface AdminTableProps {
     searchValue?: string
@@ -289,21 +251,21 @@ export default function AdminTable({
             key: "role",
             header: "Role",
             align: "center",
-            cell: (item) => <RoleBadge role={item.role} />,
+            cell: (item) => <span className="text-primary text-sm font-semibold uppercase">{item.role}</span>
         },
         {
             key: "designation",
             header: "Designation",
             align: "center",
             cell: (item) => (
-                <span className="text-[#1A1A1A] text-sm">{item.designation}</span>
+                <span className="text-primary text-sm font-semibold">{item.designation}</span>
             ),
         },
         {
             key: "status",
             header: "Status",
             align: "center",
-            cell: (item) => <StatusBadge status={item.status} />,
+            cell: (item) => <span className="text-primary text-sm font-semibold">{item.status}</span>
         },
         {
             key: "action",

@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Filter, ChevronDown } from "lucide-react";
-import { OverviewStats } from "@/components/module/dashboard/OverviewStats";
-import { UserGrowthChart } from "@/components/module/dashboard/UserGrowthChart";
-import { UsersOSChart } from "@/components/module/dashboard/UsersOSChart";
-import { UserRetentionChart } from "@/components/module/dashboard/UserRetentionChart";
+import OverviewStats from "@/components/module/dashboard/OverviewStats";
+import UserGrowthChart from "@/components/module/dashboard/UserGrowthChart";
+import UsersOSChart from "@/components/module/dashboard/UsersOSChart";
+import UserRetentionChart from "@/components/module/dashboard/UserRetentionChart";
 import {
     DropdownMenu,
     DropdownMenuContent,

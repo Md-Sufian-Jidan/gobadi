@@ -62,7 +62,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export const UserLocationChart: React.FC = () => {
+export default function UserLocationChart() {
     const [roleTab, setRoleTab] = useState<"farmer" | "doctor">("farmer");
     const [filter, setFilter] = useState("District");
     const [activeLocation, setActiveLocation] = useState<string>("Chandpur");

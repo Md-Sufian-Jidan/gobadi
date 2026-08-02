@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Noto_Sans_Bengali, Inter, Audiowide, Geist } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,7 +25,7 @@ const notoBengali = Noto_Sans_Bengali({
   subsets: ["bengali"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
 const siteName = "Gobadi";
 const siteDescription = "Gobadi is an AI-powered digital platform connecting farmers, veterinarians, and trusted livestock service providers in one place.";
 
@@ -103,6 +104,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn("h-full", "antialiased", inter.variable, spaceGrotesk.variable, notoBengali.variable, audiowide.variable)}>
         {children}
+        <Toaster richColors={true} position="top-right" />
       </body>
     </html>
   );

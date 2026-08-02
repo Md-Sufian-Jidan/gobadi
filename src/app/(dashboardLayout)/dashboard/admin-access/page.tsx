@@ -7,17 +7,19 @@ import DataTableHeader from "@/components/shared/DataTableHeader"
 import AdminTable from "@/components/module/dashboard/adminAccess/AdminTable"
 import AddAdminModal from "@/components/module/dashboard/adminAccess/AddAdminModal"
 import type { AdminFormData } from "@/components/module/dashboard/adminAccess/AddAdminModal"
+import { Button } from "@/components/ui/button"
+import addnewplus from "@/assets/addnewplus.svg"
+import Image from "next/image"
 
 export default function AdminAccessPage() {
     const [searchValue, setSearchValue] = useState("")
     const [selectedFilter, setSelectedFilter] = useState("all")
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [totalCount, setTotalCount] = useState(0)
 
     const handleAdd = useCallback((admin: AdminFormData) => {
         const addFn = (window as unknown as Record<string, unknown>).__addAdmin
         if (typeof addFn === "function") {
-            ;(addFn as (a: AdminFormData) => void)(admin)
+            ; (addFn as (a: AdminFormData) => void)(admin)
         }
     }, [])
 
@@ -27,12 +29,11 @@ export default function AdminAccessPage() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="bg-[#FCFCFC] border border-[#EAE5DD] shadow-xs rounded-[20px] sm:rounded-[28px] p-4 sm:p-7 flex flex-col gap-5 sm:gap-6"
+                className="bg-[#FCFCFC] border border-[#EAE5DD] shadow-xs rounded-[20px] sm:rounded-[28px] p-4 flex flex-col gap-5 sm:gap-6"
             >
                 {/* Page Header */}
                 <DataTableHeader
                     title="Admin List"
-                    totalCount={totalCount}
                     searchValue={searchValue}
                     onSearchChange={setSearchValue}
                     selectedFilter={selectedFilter}
@@ -43,15 +44,21 @@ export default function AdminAccessPage() {
                         { label: "Inactive", value: "inactive" },
                     ]}
                     actions={
-                        <button
-                            type="button"
+                        <Button
+                            variant="secondary"
                             id="add-new-admin-btn"
                             onClick={() => setIsModalOpen(true)}
-                            className="flex items-center gap-2 h-9 px-4 rounded-xl bg-[#F0EDE8] border border-[#E5E0D8] text-xs sm:text-sm font-semibold text-[#1A1A1A] hover:bg-[#E5E0D8] transition-colors cursor-pointer whitespace-nowrap"
+                            className="h-10 px-5 py-2.5 rounded-lg bg-gradient-to-b from-[#E5E5E5] to-[#E2E2E2] border border-[#D4D4D4] text-sm font-medium text-primary hover:shadow-md hover:from-[#E2E2E2] hover:to-[#E5E5E5] transition-all cursor-pointer flex items-center gap-2"
                         >
-                            <Plus className="w-4 h-4" />
-                            Add New Admin
-                        </button>
+                            <Image
+                                src={addnewplus}
+                                alt="Add new admin icon"
+                                width={16}
+                                height={16}
+                                className="w-4 h-4"
+                            />
+                            <span>Add New Admin</span>
+                        </Button>
                     }
                 />
 
@@ -60,7 +67,6 @@ export default function AdminAccessPage() {
                     searchValue={searchValue}
                     selectedFilter={selectedFilter}
                     hideHeaderControls
-                    onDataChange={setTotalCount}
                 />
             </motion.section>
 
@@ -72,4 +78,4 @@ export default function AdminAccessPage() {
             />
         </>
     )
-}
+};
