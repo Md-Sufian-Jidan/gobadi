@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { Kbd, KbdGroup } from "@/components/ui/kbd"
+import { Kbd } from "@/components/ui/kbd"
 
 export interface FilterOption {
     label: string
@@ -17,25 +17,15 @@ export interface FilterOption {
 }
 
 export interface DataTableHeaderProps {
-    /** The title of the entity (e.g., "Farmers", "Products", "Users") */
     title?: string
-    /** Total count of items */
     totalCount?: number
-    /** Controlled search input value */
     searchValue?: string
-    /** Search input placeholder text */
     searchPlaceholder?: string
-    /** Search value change handler */
     onSearchChange?: (value: string) => void
-    /** Selected filter option value */
     selectedFilter?: string
-    /** Array of available filter options */
     filterOptions?: FilterOption[]
-    /** Filter selection change handler */
     onFilterChange?: (filter: string) => void
-    /** Optional keyboard shortcut hint (e.g. "⌘ K") */
     shortcutHint?: string
-    /** Optional extra elements to render on the right (e.g., Export/Add buttons) */
     actions?: React.ReactNode
 }
 
@@ -57,8 +47,7 @@ export default function DataTableHeader({
     shortcutHint = "⌘ K",
     actions,
 }: DataTableHeaderProps) {
-    const currentLabel =
-        filterOptions.find((opt) => opt.value === selectedFilter)?.label || "All"
+    const currentLabel = filterOptions.find((opt) => opt.value === selectedFilter)?.label || "All"
 
     return (
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-1">
