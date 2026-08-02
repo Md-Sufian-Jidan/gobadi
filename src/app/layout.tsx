@@ -1,5 +1,5 @@
-import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Noto_Sans_Bengali, Inter, Audiowide, Geist } from "next/font/google";
+import type { Metadata } from "next";
+import { Space_Grotesk, Noto_Sans_Bengali, Inter, Audiowide } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
@@ -102,7 +102,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("h-full", "antialiased", inter.variable, spaceGrotesk.variable, notoBengali.variable, audiowide.variable)}>
+      <body className={`h-full antialiased ${inter.variable} ${spaceGrotesk.variable} ${notoBengali.variable} ${audiowide.variable}`}>
         {children}
         <Toaster richColors={true} position="top-right" />
       </body>

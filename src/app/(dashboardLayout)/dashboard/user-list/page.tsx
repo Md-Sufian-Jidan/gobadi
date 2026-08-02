@@ -70,7 +70,7 @@ export default function UserListPage() {
 
             {/* Bottom Row: Task Feature User Chart */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
-                <div className="lg:col-span-5 xl:col-span-5 flex flex-col">
+                <div className="lg:col-span-5 flex flex-col">
                     <TaskFeatureChart />
                 </div>
             </div>
