@@ -7,6 +7,8 @@ import OverviewStats from "@/components/module/dashboard/OverviewStats";
 import UserGrowthChart from "@/components/module/dashboard/UserGrowthChart";
 import UsersOSChart from "@/components/module/dashboard/UsersOSChart";
 import UserRetentionChart from "@/components/module/dashboard/UserRetentionChart";
+import AiUserChart from "@/components/module/dashboard/AiUserChart";
+import DoctorsAppointmentChart from "@/components/module/dashboard/DoctorsAppointmentChart";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -19,9 +21,9 @@ export default function DashboardPage() {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             className="bg-[#FCFCFC] border border-[#EAE5DD] shadow-xs rounded-[20px] sm:rounded-[28px] p-4 sm:p-7 flex flex-col gap-5 sm:gap-6"
         >
             {/* Top Header of Overview */}
@@ -54,15 +56,25 @@ export default function DashboardPage() {
             {/* Overview 4 Stat Cards */}
             <OverviewStats />
 
-            {/* 3 Interactive Chart Cards Grid */}
+            {/* Middle Row: User Growth & User's OS Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
-                <div className="lg:col-span-4 flex flex-col">
+                <div className="lg:col-span-6 flex flex-col">
                     <UserGrowthChart />
                 </div>
-                <div className="lg:col-span-4 flex flex-col">
+                <div className="lg:col-span-6 flex flex-col">
                     <UsersOSChart />
                 </div>
-                <div className="lg:col-span-4 flex flex-col">
+            </div>
+
+            {/* Bottom Row: AI User, Doctor's Appointment, and User Retention Charts */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-stretch">
+                <div className="lg:col-span-4 xl:col-span-4 flex flex-col">
+                    <AiUserChart />
+                </div>
+                <div className="lg:col-span-5 xl:col-span-5 flex flex-col">
+                    <DoctorsAppointmentChart />
+                </div>
+                <div className="lg:col-span-3 xl:col-span-3 flex flex-col">
                     <UserRetentionChart />
                 </div>
             </div>
