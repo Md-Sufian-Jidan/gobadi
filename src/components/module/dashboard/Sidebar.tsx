@@ -16,6 +16,7 @@ import dashboardMenuIcon1 from "@/assets/dashboard-menu-icon-1.svg";
 import dashboardMenuIcon2 from "@/assets/dashboard-menu-icon-2.svg";
 import dashboardMenuIcon3 from "@/assets/dashboard-menu-icon-3.svg";
 import dashboardMenuIcon4 from "@/assets/dashboard-menu-icon-4.svg";
+import dashboardMenuIcon5 from "@/assets/dashboardanimallist.svg";
 
 interface SidebarProps {
   collapsed?: boolean;
@@ -60,6 +61,12 @@ export const SidebarContent: React.FC<SidebarProps> = ({
           active: pathname === "/dashboard/user-list/doctors",
         },
       ],
+    },
+    {
+      name: "Animal List",
+      href: "/dashboard/animal-list",
+      icon: dashboardMenuIcon5,
+      active: pathname === "/dashboard/animal-list",
     },
     {
       name: "Notifications",
