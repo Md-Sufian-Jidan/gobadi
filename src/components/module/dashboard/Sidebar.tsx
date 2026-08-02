@@ -69,7 +69,7 @@ export const SidebarContent: React.FC<SidebarProps> = ({
       active: pathname === "/dashboard/animal-list",
     },
     {
-      name: "Notifications",
+      name: "Push Notifications",
       href: "/dashboard/notifications",
       icon: dashboardMenuIcon3,
       active: pathname === "/dashboard/notifications",
