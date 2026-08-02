@@ -3,7 +3,10 @@ import { Space_Grotesk, Noto_Sans_Bengali, Inter, Audiowide, Geist } from "next/
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -19,11 +22,6 @@ const audiowide = Audiowide({
 const notoBengali = Noto_Sans_Bengali({
   variable: "--font-noto-bengali",
   subsets: ["bengali"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -102,11 +100,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn("h-full", "antialiased", inter.variable, spaceGrotesk.variable, notoBengali.variable, audiowide.variable, "font-sans", geist.variable)}
-    >
-      <body className="min-h-full flex flex-col font-sans">{children}
+    <html lang="en">
+      <body className={cn("h-full", "antialiased", inter.variable, spaceGrotesk.variable, notoBengali.variable, audiowide.variable)}>
+        {children}
       </body>
     </html>
   );

@@ -50,7 +50,7 @@ export default function Hero() {
     return (
         <section
             aria-label="Gobadi hero"
-            className="relative mx-auto max-w-[1350px] px-4 sm:px-6 lg:px-0 mt-10 lg:mt-20"
+            className="relative mx-auto max-w-[1350px] px-4 sm:px-6 lg:px-0 mt-10 lg:mt-20 "
         >
             <div className="space-y-4 lg:space-y-8 px-0 lg:px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-0 lg:gap-6">

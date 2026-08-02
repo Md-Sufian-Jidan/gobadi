@@ -49,15 +49,15 @@ export const SidebarContent: React.FC<SidebarProps> = ({
       subItems: [
         {
           name: "Farmers",
-          href: "/dashboard/users/farmers",
+          href: "/dashboard/user-list/farmers",
           count: "8,000",
-          active: pathname === "/dashboard/users/farmers",
+          active: pathname === "/dashboard/user-list/farmers",
         },
         {
           name: "Doctors",
-          href: "/dashboard/users/doctors",
+          href: "/dashboard/user-list/doctors",
           count: "3,200",
-          active: pathname === "/dashboard/users/doctors",
+          active: pathname === "/dashboard/user-list/doctors",
         },
       ],
     },
