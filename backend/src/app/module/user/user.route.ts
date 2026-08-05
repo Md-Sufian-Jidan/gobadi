@@ -17,12 +17,14 @@ router.use(authenticate);
 
 router.get("/", authorize("admin"), getAllUsers);
 router.get("/:id", getUserById);
+
 router.put(
   "/:id",
   uploadImageMiddleware.single("avatar"),
   validateRequest(updateUserValidationSchema),
   updateUser
 );
+
 router.delete("/:id", authorize("admin"), deleteUser);
 
 export const UserRoutes = router;

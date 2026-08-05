@@ -3,8 +3,6 @@ import status from 'http-status';
 import { TErrorSources, TGenericErrorResponse } from '../interfaces/error.interface';
 
 const handleZodError = (err: z.ZodError): TGenericErrorResponse => {
-
-
   const statusCode = status.BAD_REQUEST;
   const message = 'Validation Error From Zod';
   const errorSources: TErrorSources = [];
