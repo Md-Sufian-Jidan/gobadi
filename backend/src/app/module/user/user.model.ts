@@ -1,8 +1,21 @@
-import { Schema, model } from 'mongoose';
-import { IUser, UserModel, UserRole } from './user.interface';
+import { Schema, model } from "mongoose";
+import { IUser, UserModel, UserRole } from "./user.interface";
 
 const userSchema = new Schema<IUser, UserModel>(
   {
+    name: {
+      type: String,
+      trim: true,
+    },
+    
+    email: {
+      type: String,
+      unique: true,
+      sparse: true,
+      lowercase: true,
+      trim: true,
+    },
+
     phone: {
       type: String,
       unique: true,
@@ -14,19 +27,6 @@ const userSchema = new Schema<IUser, UserModel>(
       type: String,
       enum: Object.values(UserRole),
       default: UserRole.USER,
-    },
-
-    name: {
-      type: String,
-      trim: true,
-    },
-
-    email: {
-      type: String,
-      unique: true,
-      sparse: true,
-      lowercase: true,
-      trim: true,
     },
 
     avatar: {
@@ -68,7 +68,7 @@ const userSchema = new Schema<IUser, UserModel>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
-export const User = model<IUser, UserModel>('User', userSchema);
+export const User = model<IUser, UserModel>("User", userSchema);
