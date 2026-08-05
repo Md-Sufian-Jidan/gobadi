@@ -1,0 +1,15 @@
+import { Router } from "express";
+import { authenticate } from "../../middlewares/auth";
+import { register, login, logout, forgotPassword, resetPassword, refreshToken, getProfile, } from "./auth.controller";
+import { validateRequest } from "../../middlewares/validateRequest";
+import { authRateLimiter } from "../../middlewares/rateLimiter";
+import { forgotPasswordValidationSchema, loginValidationSchema, registerValidationSchema, resetPasswordValidationSchema } from "./auth.validation";
+const router = Router();
+router.post("/register", authRateLimiter, validateRequest(registerValidationSchema), register);
+router.post("/login", authRateLimiter, validateRequest(loginValidationSchema), login);
+router.post("/forgot-password", authRateLimiter, validateRequest(forgotPasswordValidationSchema), forgotPassword);
+router.post("/reset-password/:token", authRateLimiter, validateRequest(resetPasswordValidationSchema), resetPassword);
+router.post("/refresh-token", refreshToken);
+router.get("/profile", authenticate, getProfile);
+router.post("/logout", authenticate, logout);
+export const AuthRoutes = router;
