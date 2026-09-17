@@ -32,6 +32,7 @@
     "multer": "^2.2.0",
     "nodemailer": "^9.0.4",
     "pg": "^8.23.0",
+    "swagger-jsdoc": "^6.3.0",
     "typescript": "^5.7.3",
     "zod": "^4.4.3"
   },
@@ -45,6 +46,7 @@
     "@types/node": "^26.1.2",
     "@types/nodemailer": "^8.0.1",
     "@types/pg": "^8.20.3",
+    "@types/swagger-jsdoc": "^6.0.4",
     "prisma": "^7.9.1",
     "tsx": "^4.23.5"
   }

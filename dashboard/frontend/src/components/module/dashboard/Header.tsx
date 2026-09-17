@@ -112,9 +112,9 @@ export default function Header({ onOpenMobileMenu }: HeaderProps) {
               <Image
                 src={admin.avatar}
                 alt={displayName}
-                width={30}
-                height={30}
-                className="hidden md:block w-full h-full object-cover rounded-full"
+                width={50}
+                height={50}
+                className="hidden md:block w-12 h-12 object-cover rounded-full"
               />
             ) : (
               <div className="hidden md:flex w-10 h-10 rounded-full bg-[#C15C2B] items-center justify-center text-white font-bold text-sm">

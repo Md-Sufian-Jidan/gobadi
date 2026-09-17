@@ -7,6 +7,7 @@ import { sendResponse } from './app/utils/sendResponse';
 import { notFound } from './app/middlewares/notFound';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import router from './app/routes';
+import { swaggerSpec } from './app/swagger';
 
 const app: Application = express();
 
@@ -19,6 +20,46 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
 }));
 app.use(cookieParser());
+
+app.get('/api-docs/swagger.json', (_req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
+app.get('/api-docs', (_req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gobadi Dashboard API Docs</title>
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+  <style>
+    html { box-sizing: border-box; overflow-y: scroll; }
+    *, *:before, *:after { box-sizing: inherit; }
+    body { margin: 0; background: #fafafa; }
+  </style>
+</head>
+<body>
+  <div id="swagger-ui"></div>
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js" charset="UTF-8"></script>
+  <script>
+    SwaggerUIBundle({
+      url: '/api-docs/swagger.json',
+      dom_id: '#swagger-ui',
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIBundle.SwaggerUIStandalonePreset
+      ],
+      layout: "BaseLayout",
+      deepLinking: true,
+      filter: true
+    });
+  </script>
+</body>
+</html>`);
+});
 
 app.get('/', (req: Request, res: Response) => {
   sendResponse(res, {
