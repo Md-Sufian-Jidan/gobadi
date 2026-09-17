@@ -1,0 +1,20 @@
+model Doctor {
+  id              Int      @id @default(autoincrement())
+  userId          Int?
+  name            String
+  specialty       String
+  experience      String
+  rating          Float    @default(4.8)
+  avatar          String
+  bio             String
+  qualifications  String[]
+  licenseNumber   String?
+  consultationFee Float    @default(500)
+  isVerified      Boolean  @default(false)
+
+  clinicDoctors ClinicDoctor[]
+
+  @@index([userId])
+  @@index([specialty])
+  @@map("doctors")
+}

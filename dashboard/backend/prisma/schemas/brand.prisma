@@ -1,0 +1,12 @@
+model Brand {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  slug        String  @unique
+  description String?
+  logo        String?
+  website     String?
+
+  products Product[]
+
+  @@map("brands")
+}

@@ -1,0 +1,23 @@
+model Transaction {
+  id                   String        @id @default(uuid())
+  orderId              String?
+  bookingId            Int?
+  userId               Int
+  amount               Float
+  provider             String
+  status               PaymentStatus @default(pending)
+  gatewayTransactionId String?
+  gatewayMetadata      Json?
+  redirectUrl          String?
+  callbackUrl          String?
+  auditTrail           Json          @default("[]")
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([bookingId])
+  @@index([userId])
+  @@map("transactions")
+}

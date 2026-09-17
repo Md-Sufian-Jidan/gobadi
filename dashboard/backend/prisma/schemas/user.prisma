@@ -1,0 +1,202 @@
+enum UserRole {
+  user
+  doctor
+  clinic
+  admin
+}
+
+enum AdminRole {
+  admin
+  super_admin
+}
+
+enum AdminDesignation {
+  founder
+  co_founder
+  manager
+  developer
+  analyst
+  support
+}
+
+enum AdminStatus {
+  active
+  deactive
+}
+
+enum ProductStatus {
+  draft
+  published
+  archived
+}
+
+enum InventoryMovementType {
+  addition
+  reservation
+  sale
+  return
+  adjustment
+}
+
+enum OrderStatus {
+  pending
+  confirmed
+  preparing
+  packed
+  shipped
+  delivered
+  completed
+  cancelled
+  refunded
+  returned
+  failed
+}
+
+enum LivestockStatus {
+  draft
+  published
+  archived
+}
+
+enum ProviderType {
+  doctor
+  clinic
+  ai
+}
+
+enum AppointmentStatusEnum {
+  PENDING
+  CONFIRMED
+  RESCHEDULED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  pending
+  processing
+  successful
+  failed
+  cancelled
+  expired
+  refunded
+}
+
+enum DeliveryStatus {
+  pending
+  picked_up
+  in_transit
+  out_for_delivery
+  delivered
+  failed
+  returned
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  READ
+}
+
+enum NotificationType {
+  order
+  booking
+  payment
+  delivery
+  reminder
+  ai_ready
+  prescription_ready
+  promotion
+  system
+  message
+  referral
+}
+
+enum ReviewTargetType {
+  product
+  livestock
+  doctor
+  clinic
+  service
+}
+
+enum PayoutStatus {
+  NONE
+  PENDING
+  PAID
+}
+
+enum AiDiagnosisStatusEnum {
+  PENDING
+  READY
+  FAILED
+}
+
+enum AttachmentStatus {
+  UPLOADED
+  PROCESSING
+  READY
+  FAILED
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AlertActionType {
+  MANAGE
+  SCHEDULE
+}
+
+enum AttachmentTypeEnum {
+  image
+  document
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  phone       String?  @unique
+  email       String?  @unique
+  name        String?
+  avatar      String?
+  password    String?
+  role        UserRole @default(user)
+  verified    Boolean  @default(false)
+  googleId    String?  @unique
+  facebookId  String?  @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  refreshTokens      RefreshToken[]
+  notifications      Notification[]
+  addresses          Address[]
+  cartItems          CartItem[]
+  wishlistItems      WishlistItem[]
+  orders             Order[]
+  reviews            Review[]
+  pushTokens         PushToken[]
+  tasks              Task[]
+  aiDiagnoses        AiDiagnosis[]
+  livestock          Livestock[] @relation("SellerLivestock")
+  transactions       Transaction[]
+  referrals          Referral[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}

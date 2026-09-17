@@ -1,0 +1,17 @@
+model OrderItem {
+  id         Int     @id @default(autoincrement())
+  orderId    String
+  productId  Int?
+  livestockId Int?
+  quantity   Int
+  price      Float
+  discount   Float   @default(0)
+  name       String
+
+  order     Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
+  livestock Livestock? @relation(fields: [livestockId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@map("order_items")
+}

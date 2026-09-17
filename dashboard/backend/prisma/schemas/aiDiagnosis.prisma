@@ -1,0 +1,19 @@
+model AiDiagnosis {
+  id                   Int                   @id @default(autoincrement())
+  userId               Int
+  images               String[]              @default([])
+  symptoms             String[]              @default([])
+  status               AiDiagnosisStatusEnum @default(PENDING)
+  failureReason        String?
+  analysisResult       String?
+  confidenceScore      Float?
+  recommendations      String[]              @default([])
+  recommendedDoctorIds Int[]                 @default([])
+  prescriptionId       Int?
+  createdAt            DateTime              @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("ai_diagnoses")
+}

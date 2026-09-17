@@ -1,0 +1,13 @@
+model Animal {
+  id     Int     @id @default(autoincrement())
+  userId Int?
+  name   String
+  breed  String
+  weight String
+  age    String
+  color  String
+  image  String?
+
+  @@index([userId])
+  @@map("animals")
+}

@@ -1,0 +1,34 @@
+model Appointment {
+  id                   Int                  @id @default(autoincrement())
+  doctorId             Int
+  clinicId             Int?
+  serviceId            Int?
+  patientId            Int
+  startAt              DateTime
+  endAt                DateTime
+  durationMinutes      Int
+  price                Float                @default(0)
+  paymentStatus        String               @default("pending")
+  paymentTransactionId String?
+  prescription         String?
+  notes                String?
+  followUpId           Int?
+  status               AppointmentStatusEnum @default(CONFIRMED)
+  reminder24hSent      Boolean              @default(false)
+  reminder1hSent       Boolean              @default(false)
+  cancelledAt          DateTime?
+  cancelledByUserId    Int?
+  originalStartAt      DateTime?
+  rescheduledAt        DateTime?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  service Service? @relation(fields: [serviceId], references: [id])
+
+  @@index([doctorId])
+  @@index([clinicId])
+  @@index([serviceId])
+  @@index([patientId])
+  @@unique([doctorId, startAt])
+  @@map("appointments")
+}

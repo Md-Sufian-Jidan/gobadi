@@ -1,0 +1,39 @@
+model Livestock {
+  id                  Int             @id @default(autoincrement())
+  sellerId            Int
+  species             String
+  breed               String
+  age                 String
+  weight              Float
+  gender              String
+  vaccinationHistory  Json?
+  medicalHistory      Json?
+  healthStatus        String
+  pregnancyStatus     String?
+  certification       String?
+  farmName            String
+  location            String
+  images              String[]        @default([])
+  videos              String[]        @default([])
+  documents           String[]        @default([])
+  price               Float
+  isNegotiable        Boolean         @default(false)
+  isFeatured          Boolean         @default(false)
+  isReserved          Boolean         @default(false)
+  isSold              Boolean         @default(false)
+  status              LivestockStatus @default(draft)
+  isVerified          Boolean         @default(false)
+  deletedAt           DateTime?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  seller        User          @relation("SellerLivestock", fields: [sellerId], references: [id], onDelete: Cascade)
+  orderItems    OrderItem[]
+  cartItems     CartItem[]
+  wishlistItems WishlistItem[]
+
+  @@index([sellerId])
+  @@index([species])
+  @@index([breed])
+  @@map("livestock")
+}

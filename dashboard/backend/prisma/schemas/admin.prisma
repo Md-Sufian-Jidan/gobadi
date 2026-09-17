@@ -1,0 +1,32 @@
+model Admin {
+  id          Int              @id @default(autoincrement())
+  name        String?
+  email       String           @unique
+  password    String
+  role        AdminRole        @default(admin)
+  designation AdminDesignation
+  avatar      String?
+  phone       String?
+  status      AdminStatus      @default(active)
+  verified    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  refreshTokens AdminRefreshToken[]
+
+  @@map("admins")
+}
+
+model AdminRefreshToken {
+  id        Int       @id @default(autoincrement())
+  adminId   Int
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@map("admin_refresh_tokens")
+}

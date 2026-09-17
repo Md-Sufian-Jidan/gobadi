@@ -1,0 +1,16 @@
+model Conversation {
+  id            Int        @id @default(autoincrement())
+  doctorId      Int
+  doctorUserId  Int?
+  patientId     Int
+  appointmentId Int?
+  lastMessageAt DateTime?
+  createdAt     DateTime   @default(now())
+
+  chatMessages ChatMessage[]
+
+  @@index([doctorId])
+  @@unique([doctorId, patientId])
+  @@index([patientId])
+  @@map("conversations")
+}

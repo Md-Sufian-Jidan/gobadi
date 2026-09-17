@@ -1,0 +1,10 @@
+model ClinicDoctor {
+  clinicId Int
+  doctorId Int
+
+  clinic Clinic @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  doctor Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@id([clinicId, doctorId])
+  @@map("clinic_doctors")
+}

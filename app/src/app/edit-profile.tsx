@@ -1,0 +1,232 @@
+import React, { useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { useGetMyProfileQuery, useUpdateMyProfileMutation } from '@/store/usersApi';
+
+export default function EditProfileScreen() {
+  const router = useRouter();
+  const { data: profile } = useGetMyProfileQuery();
+  const [updateProfile] = useUpdateMyProfileMutation();
+
+  const [name, setName] = useState(profile?.name || '');
+  const [phone, setPhone] = useState(profile?.phone || '');
+  const [location, setLocation] = useState('');
+
+  useEffect(() => {
+    if (profile?.name) setName(profile.name);
+    if (profile?.phone) setPhone(profile.phone);
+  }, [profile]);
+
+  async function handleSaveField(fields: { name?: string }) {
+    try {
+      await updateProfile(fields).unwrap();
+    } catch (err) {
+      console.log('Error updating profile:', err);
+    }
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+          activeOpacity={0.8}
+        >
+          <Ionicons name="arrow-back" size={20} color="#FFFFFF" />
+        </TouchableOpacity>
+
+        <Text style={styles.headerTitle}>Edit Profile</Text>
+
+        <View style={{ width: 42 }} />
+      </View>
+
+      <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        {/* Profile Card Container */}
+        <View style={styles.profileCard}>
+          {/* Avatar with Camera Icon Overlay */}
+          <View style={styles.avatarWrapper}>
+            <Image
+              source={require('@/assets/images/user_profile.png')}
+              style={styles.avatarImage}
+            />
+            <TouchableOpacity style={styles.cameraIconContainer} activeOpacity={0.85}>
+              <Ionicons name="camera-outline" size={20} color="#BD632F" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Form Fields */}
+          <View style={styles.fieldContainer}>
+            <Text style={styles.fieldLabel}>Your name</Text>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.textInput}
+                value={name}
+                onChangeText={setName}
+                placeholder="Enter name"
+                placeholderTextColor="#A39E99"
+                onBlur={() => handleSaveField({ name })}
+              />
+              <TouchableOpacity style={styles.inputActionBtn} activeOpacity={0.7}>
+                <Ionicons name="mic-outline" size={20} color="#BD632F" />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.fieldContainer}>
+            <Text style={styles.fieldLabel}>Mobile Number</Text>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.textInput}
+                value={phone}
+                onChangeText={setPhone}
+                editable={false}
+                placeholder='Enter Phone'
+                placeholderTextColor="#A39E99"
+                keyboardType="phone-pad"
+              />
+              <Ionicons name="checkmark-circle" size={22} color="#4CAF50" />
+            </View>
+          </View>
+
+          <View style={styles.fieldContainer}>
+            <Text style={styles.fieldLabel}>Location (Village/District)</Text>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={styles.textInput}
+                value={location}
+                onChangeText={setLocation}
+                placeholder="Enter location"
+                placeholderTextColor="#A39E99"
+              />
+              <TouchableOpacity style={styles.inputActionBtn} activeOpacity={0.7}>
+                <Ionicons name="locate-outline" size={20} color="#BD632F" />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FAF9F6',
+  },
+  scrollContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingTop: 12,
+    marginBottom: 20,
+  },
+  backButton: {
+    width: 42,
+    height: 42,
+    borderRadius: 12,
+    backgroundColor: '#BD632F',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#BD632F',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#1A1817',
+  },
+  profileCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: '#E6E1DC',
+    padding: 24,
+    alignItems: 'center',
+    marginBottom: 24,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.02,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  avatarWrapper: {
+    position: 'relative',
+    marginBottom: 28,
+  },
+  avatarImage: {
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    borderWidth: 2,
+    borderColor: '#E6E1DC',
+  },
+  cameraIconContainer: {
+    position: 'absolute',
+    bottom: 2,
+    right: 2,
+    backgroundColor: '#FFFFFF',
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: '#E6E1DC',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  fieldContainer: {
+    width: '100%',
+    marginBottom: 18,
+  },
+  fieldLabel: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: '#BD7D5B',
+    marginBottom: 6,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FAF9F6',
+    borderWidth: 1,
+    borderColor: '#E6E1DC',
+    borderRadius: 14,
+    height: 52,
+    paddingHorizontal: 16,
+  },
+  textInput: {
+    flex: 1,
+    height: '100%',
+    fontSize: 15,
+    color: '#1A1817',
+    fontWeight: '700',
+  },
+  inputActionBtn: {
+    padding: 4,
+  },
+});

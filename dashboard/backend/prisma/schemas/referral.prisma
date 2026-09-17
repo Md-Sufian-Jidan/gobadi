@@ -1,0 +1,16 @@
+model Referral {
+  id                   Int         @id @default(autoincrement())
+  userId               Int         @unique
+  referralCode         String      @unique
+  totalEarned          Float       @default(0)
+  pendingAmount        Float       @default(0)
+  payoutStatus         PayoutStatus @default(NONE)
+  referralCount        Int         @default(0)
+  redeemedReferralCode String?
+  createdAt            DateTime    @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("referrals")
+}

@@ -1,0 +1,14 @@
+model DoctorAvailability {
+  id                  Int     @id @default(autoincrement())
+  doctorId            Int
+  dayOfWeek           Int
+  startTime           String
+  endTime             String
+  slotDurationMinutes Int     @default(30)
+  bufferMinutes       Int     @default(10)
+  isActive            Boolean @default(true)
+
+  @@index([doctorId])
+  @@unique([doctorId, dayOfWeek])
+  @@map("doctor_availability")
+}

@@ -1,0 +1,15 @@
+model Alert {
+  id         Int           @id @default(autoincrement())
+  title      String
+  location   String
+  crop       String
+  severity   AlertSeverity
+  actionType AlertActionType
+  isActive   Boolean       @default(true)
+  createdAt  DateTime      @default(now())
+
+  alertActionLogs AlertActionLog[]
+
+  @@index([isActive])
+  @@map("alerts")
+}

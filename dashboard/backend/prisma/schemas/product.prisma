@@ -1,0 +1,36 @@
+model Product {
+  id                    Int           @id @default(autoincrement())
+  sku                   String        @unique
+  barcode               String?
+  name                  String
+  description           String
+  price                 Float
+  discount              Float         @default(0)
+  brandId               Int?
+  categoryId            Int?
+  specifications        Json?
+  instructions          String?
+  images                String[]      @default([])
+  videos                String[]      @default([])
+  documents             String[]      @default([])
+  seoTitle              String?
+  seoDescription        String?
+  seoKeywords           String?
+  status                ProductStatus @default(draft)
+  visibility            Boolean       @default(true)
+  isPrescriptionRequired Boolean      @default(false)
+  deletedAt             DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  brand    Brand?    @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  inventoryLedgers InventoryLedger[]
+  orderItems       OrderItem[]
+  cartItems        CartItem[]
+  wishlistItems    WishlistItem[]
+
+  @@index([barcode])
+  @@map("products")
+}

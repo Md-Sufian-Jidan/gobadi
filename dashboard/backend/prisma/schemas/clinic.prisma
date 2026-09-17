@@ -1,0 +1,17 @@
+model Clinic {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  name          String
+  location      String
+  businessHours Json?
+  isVerified    Boolean  @default(false)
+  rating        Float    @default(5.0)
+  avatar        String?
+  description   String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  clinicDoctors ClinicDoctor[]
+
+  @@map("clinics")
+}

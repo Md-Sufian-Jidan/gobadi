@@ -1,0 +1,14 @@
+model PushToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique
+  deviceId  String?
+  os        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("push_tokens")
+}

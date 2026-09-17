@@ -1,0 +1,16 @@
+model Delivery {
+  id              Int            @id @default(autoincrement())
+  orderId         String         @unique
+  trackingNumber  String         @unique
+  courierName     String
+  status          DeliveryStatus @default(pending)
+  timeline        Json           @default("[]")
+  deliveryProofUrl String?
+  deliveryNotes   String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("deliveries")
+}
