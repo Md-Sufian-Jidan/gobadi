@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NotificationRoutes = void 0;
+const express_1 = require("express");
+const auth_1 = require("../../middlewares/auth");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const notification_validation_1 = require("./notification.validation");
+const notification_controller_1 = require("./notification.controller");
+const router = (0, express_1.Router)();
+// All routes require authentication
+router.use(auth_1.authenticate);
+router.get("/unread-count", notification_controller_1.unreadCount);
+router.get("/", (0, auth_1.authorize)("admin", "super_admin"), notification_controller_1.getAll);
+router.get("/user", notification_controller_1.getByUser);
+router.get("/:id", (0, auth_1.authorize)("admin", "super_admin"), notification_controller_1.getOne);
+router.post("/", (0, auth_1.authorize)("admin", "super_admin"), (0, validateRequest_1.validateRequest)(notification_validation_1.createNotificationValidationSchema), notification_controller_1.create);
+router.post("/send", (0, auth_1.authorize)("admin", "super_admin"), (0, validateRequest_1.validateRequest)(notification_validation_1.sendNotificationValidationSchema), notification_controller_1.send);
+router.post("/broadcast", (0, auth_1.authorize)("admin", "super_admin"), (0, validateRequest_1.validateRequest)(notification_validation_1.broadcastNotificationValidationSchema), notification_controller_1.broadcast);
+router.patch("/:id/read", (0, validateRequest_1.validateRequest)(notification_validation_1.notificationParamsValidationSchema), notification_controller_1.markRead);
+router.patch("/read-all", notification_controller_1.markAllRead);
+router.delete("/:id", (0, auth_1.authorize)("admin", "super_admin"), (0, validateRequest_1.validateRequest)(notification_validation_1.notificationParamsValidationSchema), notification_controller_1.remove);
+exports.NotificationRoutes = router;

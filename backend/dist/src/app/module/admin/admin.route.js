@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AdminRoutes = void 0;
+const express_1 = require("express");
+const adminAuth_1 = require("../../middlewares/adminAuth");
+const auth_1 = require("../../middlewares/auth");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const rateLimiter_1 = require("../../middlewares/rateLimiter");
+const upload_1 = require("../../middlewares/upload");
+const admin_validation_1 = require("./admin.validation");
+const admin_auth_validation_1 = require("./admin.auth.validation");
+const admin_controller_1 = require("./admin.controller");
+const admin_auth_controller_1 = require("./admin.auth.controller");
+const router = (0, express_1.Router)();
+router.post("/login", rateLimiter_1.authRateLimiter, (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminLoginValidationSchema), admin_auth_controller_1.loginHandler);
+router.post("/send-otp", rateLimiter_1.authRateLimiter, (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminSendOtpValidationSchema), admin_auth_controller_1.sendOtpHandler);
+router.post("/verify-otp", rateLimiter_1.authRateLimiter, (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminVerifyOtpValidationSchema), admin_auth_controller_1.verifyOtpHandler);
+router.post("/forgot-password", rateLimiter_1.authRateLimiter, (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminForgotPasswordValidationSchema), admin_auth_controller_1.forgotPasswordHandler);
+router.post("/reset-password", rateLimiter_1.authRateLimiter, (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminResetPasswordValidationSchema), admin_auth_controller_1.resetPasswordHandler);
+router.post("/refresh", (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminRefreshTokenValidationSchema), admin_auth_controller_1.refreshTokenHandler);
+// ========== Admin Auth Routes (auth required) ==========
+router.post("/logout", adminAuth_1.adminAuthenticate, (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminRefreshTokenValidationSchema), admin_auth_controller_1.logoutHandler);
+router.get("/profile", adminAuth_1.adminAuthenticate, admin_auth_controller_1.getProfileHandler);
+router.patch("/profile", adminAuth_1.adminAuthenticate, upload_1.uploadImageMiddleware.single("avatar"), (0, validateRequest_1.validateRequest)(admin_auth_validation_1.adminUpdateProfileValidationSchema), admin_auth_controller_1.updateProfileHandler);
+// ========== Admin CRUD Routes (super_admin only) ==========
+router.post("/", auth_1.authenticate, (0, auth_1.authorize)("super_admin"), (0, validateRequest_1.validateRequest)(admin_validation_1.createAdminValidationSchema), admin_controller_1.create);
+router.get("/", auth_1.authenticate, (0, auth_1.authorize)("super_admin"), admin_controller_1.getAll);
+router.get("/:id", auth_1.authenticate, (0, auth_1.authorize)("super_admin"), admin_controller_1.getById);
+router.put("/:id", auth_1.authenticate, (0, auth_1.authorize)("super_admin"), (0, validateRequest_1.validateRequest)(admin_validation_1.updateAdminValidationSchema), admin_controller_1.update);
+router.delete("/:id", auth_1.authenticate, (0, auth_1.authorize)("super_admin"), (0, validateRequest_1.validateRequest)(admin_validation_1.deleteAdminValidationSchema), admin_controller_1.remove);
+router.patch("/:id/deactivate", auth_1.authenticate, (0, auth_1.authorize)("super_admin"), (0, validateRequest_1.validateRequest)(admin_validation_1.deactivateAdminValidationSchema), admin_controller_1.deactivate);
+exports.AdminRoutes = router;
